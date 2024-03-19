@@ -52,7 +52,7 @@ enum MovieDBURLRequestBuilder {
     
     static let headers = [
         "accept": "application/json",
-        "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjOTUwZjM0NWZlODRhMWNmNDJkZmRiYzYwNWIzMWY5NyIsInN1YiI6IjY0MjU4YjIyYzA0NDI5MDI2YjEyMzgzMiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.xeFA-BsIoEqdydWz3oKIWVdZ65sUeucX_fRvRGftuPs"
+        "Authorization": movieDBToken
     ]
     
     var request: URLRequest? {

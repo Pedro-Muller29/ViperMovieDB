@@ -9,12 +9,14 @@
 /* Begin PBXBuildFile section */
 		A7682FDC2BAA06E800317968 /* MovieDBURLRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7682FDB2BAA06E800317968 /* MovieDBURLRequestBuilder.swift */; };
 		A7682FDF2BAA0A6800317968 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7682FDE2BAA0A6800317968 /* NetworkService.swift */; };
+		A7682FE32BAA169200317968 /* MovieDBToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7682FE22BAA169200317968 /* MovieDBToken.swift */; };
 		F906D6262BAA002E005B5B52 /* NetworkingService.h in Headers */ = {isa = PBXBuildFile; fileRef = F906D6252BAA002E005B5B52 /* NetworkingService.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		A7682FDB2BAA06E800317968 /* MovieDBURLRequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDBURLRequestBuilder.swift; sourceTree = "<group>"; };
 		A7682FDE2BAA0A6800317968 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		A7682FE22BAA169200317968 /* MovieDBToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDBToken.swift; sourceTree = "<group>"; };
 		F906D6222BAA002E005B5B52 /* NetworkingService.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NetworkingService.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F906D6252BAA002E005B5B52 /* NetworkingService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetworkingService.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -34,6 +36,7 @@
 			isa = PBXGroup;
 			children = (
 				A7682FDB2BAA06E800317968 /* MovieDBURLRequestBuilder.swift */,
+				A7682FE22BAA169200317968 /* MovieDBToken.swift */,
 			);
 			path = MovieDB;
 			sourceTree = "<group>";
@@ -145,6 +148,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A7682FDF2BAA0A6800317968 /* NetworkService.swift in Sources */,
+				A7682FE32BAA169200317968 /* MovieDBToken.swift in Sources */,
 				A7682FDC2BAA06E800317968 /* MovieDBURLRequestBuilder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
