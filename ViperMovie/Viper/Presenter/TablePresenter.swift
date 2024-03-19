@@ -38,7 +38,7 @@ public class TablePresenter: TablePresenterProtocol {
     }
     
     public func getDataForCell(identifier: String, indexPath: IndexPath) -> Entity {
-        return MovieEntity(name: "", overview: "", rating: "", genres: [], genresIds: [], urlPath: "")
+        return MovieEntity(name: "", overview: "", rating: 0.0, genres: [], genreIds: [], urlPath: "")
     }
     
     public func touchedCellAt(indexPath: IndexPath) {
