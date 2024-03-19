@@ -7,10 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A7682FDA2BAA049700317968 /* MovieDBService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7682FD92BAA049700317968 /* MovieDBService.swift */; };
+		A7682FDC2BAA06E800317968 /* BaseMovieDBURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7682FDB2BAA06E800317968 /* BaseMovieDBURL.swift */; };
+		A7682FDF2BAA0A6800317968 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7682FDE2BAA0A6800317968 /* NetworkService.swift */; };
 		F906D6262BAA002E005B5B52 /* NetworkingService.h in Headers */ = {isa = PBXBuildFile; fileRef = F906D6252BAA002E005B5B52 /* NetworkingService.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A7682FD92BAA049700317968 /* MovieDBService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDBService.swift; sourceTree = "<group>"; };
+		A7682FDB2BAA06E800317968 /* BaseMovieDBURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseMovieDBURL.swift; sourceTree = "<group>"; };
+		A7682FDE2BAA0A6800317968 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		F906D6222BAA002E005B5B52 /* NetworkingService.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NetworkingService.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F906D6252BAA002E005B5B52 /* NetworkingService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetworkingService.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -26,6 +32,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A7682FDD2BAA06EF00317968 /* MovieDB */ = {
+			isa = PBXGroup;
+			children = (
+				A7682FD92BAA049700317968 /* MovieDBService.swift */,
+				A7682FDB2BAA06E800317968 /* BaseMovieDBURL.swift */,
+			);
+			path = MovieDB;
+			sourceTree = "<group>";
+		};
 		F906D6182BAA002E005B5B52 = {
 			isa = PBXGroup;
 			children = (
@@ -45,6 +60,8 @@
 		F906D6242BAA002E005B5B52 /* NetworkingService */ = {
 			isa = PBXGroup;
 			children = (
+				A7682FDE2BAA0A6800317968 /* NetworkService.swift */,
+				A7682FDD2BAA06EF00317968 /* MovieDB */,
 				F906D6252BAA002E005B5B52 /* NetworkingService.h */,
 			);
 			path = NetworkingService;
@@ -93,6 +110,7 @@
 				TargetAttributes = {
 					F906D6212BAA002E005B5B52 = {
 						CreatedOnToolsVersion = 15.1;
+						LastSwiftMigration = 1530;
 					};
 				};
 			};
@@ -129,6 +147,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A7682FDA2BAA049700317968 /* MovieDBService.swift in Sources */,
+				A7682FDF2BAA0A6800317968 /* NetworkService.swift in Sources */,
+				A7682FDC2BAA06E800317968 /* BaseMovieDBURL.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -263,6 +284,7 @@
 		F906D62A2BAA002E005B5B52 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -287,6 +309,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -295,6 +318,7 @@
 		F906D62B2BAA002E005B5B52 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
