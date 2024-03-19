@@ -15,6 +15,8 @@
 		F906D5CD2BA8C6E3005B5B52 /* MovieDBViperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F906D5CC2BA8C6E3005B5B52 /* MovieDBViperTests.swift */; };
 		F906D5D72BA8C6E3005B5B52 /* MovieDBViperUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F906D5D62BA8C6E3005B5B52 /* MovieDBViperUITests.swift */; };
 		F906D5D92BA8C6E3005B5B52 /* MovieDBViperUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F906D5D82BA8C6E3005B5B52 /* MovieDBViperUITestsLaunchTests.swift */; };
+		F906D6152BA9FEC5005B5B52 /* InteractorModelViperMovieDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F906D6142BA9FEC5005B5B52 /* InteractorModelViperMovieDB.framework */; };
+		F906D6162BA9FEC6005B5B52 /* InteractorModelViperMovieDB.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F906D6142BA9FEC5005B5B52 /* InteractorModelViperMovieDB.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +36,20 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		F906D6172BA9FEC6005B5B52 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				F906D6162BA9FEC6005B5B52 /* InteractorModelViperMovieDB.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		F906D5B22BA8C6E1005B5B52 /* MovieDBViper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieDBViper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F906D5B52BA8C6E1005B5B52 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -47,6 +63,7 @@
 		F906D5D22BA8C6E3005B5B52 /* MovieDBViperUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MovieDBViperUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F906D5D62BA8C6E3005B5B52 /* MovieDBViperUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDBViperUITests.swift; sourceTree = "<group>"; };
 		F906D5D82BA8C6E3005B5B52 /* MovieDBViperUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDBViperUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		F906D6142BA9FEC5005B5B52 /* InteractorModelViperMovieDB.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = InteractorModelViperMovieDB.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +71,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F906D6152BA9FEC5005B5B52 /* InteractorModelViperMovieDB.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,6 +99,7 @@
 				F906D5CB2BA8C6E3005B5B52 /* MovieDBViperTests */,
 				F906D5D52BA8C6E3005B5B52 /* MovieDBViperUITests */,
 				F906D5B32BA8C6E1005B5B52 /* Products */,
+				F906D6132BA9FEC5005B5B52 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -124,6 +143,14 @@
 			path = MovieDBViperUITests;
 			sourceTree = "<group>";
 		};
+		F906D6132BA9FEC5005B5B52 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F906D6142BA9FEC5005B5B52 /* InteractorModelViperMovieDB.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -134,6 +161,7 @@
 				F906D5AE2BA8C6E1005B5B52 /* Sources */,
 				F906D5AF2BA8C6E1005B5B52 /* Frameworks */,
 				F906D5B02BA8C6E1005B5B52 /* Resources */,
+				F906D6172BA9FEC6005B5B52 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
