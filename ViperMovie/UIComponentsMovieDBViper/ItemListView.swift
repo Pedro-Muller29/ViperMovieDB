@@ -9,12 +9,15 @@ import UIKit
 
 class ItemListView: UIViewController {
     
+    // MARK: Presenter reference
+    var presenter: TablePresenter?
+    
     // MARK: UI Components
     private let tableView: UITableView = {
         let tableView = UITableView()
         tableView.backgroundColor = .systemBackground
         tableView.allowsSelection = true
-        tableView.register(ImageTitleDescriptionRatingTableViewCell.self, forCellReuseIdentifier: "Cell")
+        tableView.register(ImageTitleDescriptionRatingTableViewCell.self, forCellReuseIdentifier: ImageTitleDescriptionRatingTableViewCell.identifier)
         return tableView
     }()
     
@@ -43,11 +46,14 @@ class ItemListView: UIViewController {
 
 extension ItemListView: UITableViewDelegate, UITableViewDataSource {
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        0
+        presenter?.getNumberOfRows(for: section) ?? 20
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: ImageTitleDescriptionRatingTableViewCell.identifier, for: indexPath)
+                as? ImageTitleDescriptionRatingTableViewCell else { return UITableViewCell() }
+        
+        return cell
     }
     
     
