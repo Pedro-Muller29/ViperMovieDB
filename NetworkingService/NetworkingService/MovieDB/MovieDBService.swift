@@ -42,7 +42,18 @@ struct Movie: Codable {
     var genreIds: [Int]?
 }
 
-class MovieDBService {
+class MovieDBService: NetworkService {
+    static func fetch(url: URLRequest, completion: @escaping (Data) -> ()) {
+        <#code#>
+    }
+    
+    static func fetch<T>(url: URLRequest, completion: @escaping ([T]) -> ()) where T : Decodable, T : Encodable {
+        <#code#>
+    }
+    
+    static func fetch<T>(url: URLRequest, completion: @escaping (T) -> ()) where T : Decodable, T : Encodable {
+        <#code#>
+    }
     
 }
 
