@@ -8,7 +8,7 @@
 import Foundation
 
 public struct NetworkService {
-    static func fetch(request: URLRequest, completion: @escaping (Result<Data, any Error>) -> ()) {
+    public static func fetch(request: URLRequest, completion: @escaping (Result<Data, any Error>) -> ()) {
         URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
                 return completion(.failure(error))
@@ -23,7 +23,7 @@ public struct NetworkService {
         .resume()
     }
     
-    static func fetch<T>(request: URLRequest, completion: @escaping (Result<[T], any Error>) -> ()) where T : Decodable, T : Encodable {
+    public static func fetch<T>(request: URLRequest, completion: @escaping (Result<[T], any Error>) -> ()) where T : Decodable, T : Encodable {
         URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
                 return completion(.failure(error))
@@ -62,7 +62,7 @@ public struct NetworkService {
         .resume()
     }
     
-    static func fetch<T>(request: URLRequest, completion: @escaping (Result<T, any Error>) -> ()) where T : Decodable, T : Encodable {
+    public static func fetch<T>(request: URLRequest, completion: @escaping (Result<T, any Error>) -> ()) where T : Decodable, T : Encodable {
         URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
                 return completion(.failure(error))
