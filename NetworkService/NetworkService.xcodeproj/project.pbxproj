@@ -7,150 +7,96 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F906D6572BAA06F6005B5B52 /* PresenterViperMovieDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F906D64E2BAA06F5005B5B52 /* PresenterViperMovieDB.framework */; };
-		F906D65C2BAA06F6005B5B52 /* PresenterViperMovieDBTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F906D65B2BAA06F6005B5B52 /* PresenterViperMovieDBTests.swift */; };
-		F906D65D2BAA06F6005B5B52 /* PresenterViperMovieDB.h in Headers */ = {isa = PBXBuildFile; fileRef = F906D6512BAA06F5005B5B52 /* PresenterViperMovieDB.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		85EA24102BAA22160013AA7B /* NetworkService.h in Headers */ = {isa = PBXBuildFile; fileRef = 85EA240F2BAA22160013AA7B /* NetworkService.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		F906D6582BAA06F6005B5B52 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = F906D6452BAA06F5005B5B52 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = F906D64D2BAA06F5005B5B52;
-			remoteInfo = PresenterViperMovieDB;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
-		F906D64E2BAA06F5005B5B52 /* PresenterViperMovieDB.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PresenterViperMovieDB.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F906D6512BAA06F5005B5B52 /* PresenterViperMovieDB.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PresenterViperMovieDB.h; sourceTree = "<group>"; };
-		F906D6562BAA06F6005B5B52 /* PresenterViperMovieDBTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PresenterViperMovieDBTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		F906D65B2BAA06F6005B5B52 /* PresenterViperMovieDBTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresenterViperMovieDBTests.swift; sourceTree = "<group>"; };
+		85EA240C2BAA22160013AA7B /* NetworkService.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NetworkService.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		85EA240F2BAA22160013AA7B /* NetworkService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetworkService.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		F906D64B2BAA06F5005B5B52 /* Frameworks */ = {
+		85EA24092BAA22160013AA7B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F906D6532BAA06F6005B5B52 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				F906D6572BAA06F6005B5B52 /* PresenterViperMovieDB.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		F906D6442BAA06F5005B5B52 = {
+		85EA24022BAA22160013AA7B = {
 			isa = PBXGroup;
 			children = (
-				F906D6502BAA06F5005B5B52 /* PresenterViperMovieDB */,
-				F906D65A2BAA06F6005B5B52 /* PresenterViperMovieDBTests */,
-				F906D64F2BAA06F5005B5B52 /* Products */,
+				85EA240E2BAA22160013AA7B /* NetworkService */,
+				85EA240D2BAA22160013AA7B /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		F906D64F2BAA06F5005B5B52 /* Products */ = {
+		85EA240D2BAA22160013AA7B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				F906D64E2BAA06F5005B5B52 /* PresenterViperMovieDB.framework */,
-				F906D6562BAA06F6005B5B52 /* PresenterViperMovieDBTests.xctest */,
+				85EA240C2BAA22160013AA7B /* NetworkService.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		F906D6502BAA06F5005B5B52 /* PresenterViperMovieDB */ = {
+		85EA240E2BAA22160013AA7B /* NetworkService */ = {
 			isa = PBXGroup;
 			children = (
-				F906D6512BAA06F5005B5B52 /* PresenterViperMovieDB.h */,
+				85EA240F2BAA22160013AA7B /* NetworkService.h */,
 			);
-			path = PresenterViperMovieDB;
-			sourceTree = "<group>";
-		};
-		F906D65A2BAA06F6005B5B52 /* PresenterViperMovieDBTests */ = {
-			isa = PBXGroup;
-			children = (
-				F906D65B2BAA06F6005B5B52 /* PresenterViperMovieDBTests.swift */,
-			);
-			path = PresenterViperMovieDBTests;
+			path = NetworkService;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		F906D6492BAA06F5005B5B52 /* Headers */ = {
+		85EA24072BAA22160013AA7B /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F906D65D2BAA06F6005B5B52 /* PresenterViperMovieDB.h in Headers */,
+				85EA24102BAA22160013AA7B /* NetworkService.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		F906D64D2BAA06F5005B5B52 /* PresenterViperMovieDB */ = {
+		85EA240B2BAA22160013AA7B /* NetworkService */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = F906D6602BAA06F6005B5B52 /* Build configuration list for PBXNativeTarget "PresenterViperMovieDB" */;
+			buildConfigurationList = 85EA24132BAA22160013AA7B /* Build configuration list for PBXNativeTarget "NetworkService" */;
 			buildPhases = (
-				F906D6492BAA06F5005B5B52 /* Headers */,
-				F906D64A2BAA06F5005B5B52 /* Sources */,
-				F906D64B2BAA06F5005B5B52 /* Frameworks */,
-				F906D64C2BAA06F5005B5B52 /* Resources */,
+				85EA24072BAA22160013AA7B /* Headers */,
+				85EA24082BAA22160013AA7B /* Sources */,
+				85EA24092BAA22160013AA7B /* Frameworks */,
+				85EA240A2BAA22160013AA7B /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = PresenterViperMovieDB;
-			productName = PresenterViperMovieDB;
-			productReference = F906D64E2BAA06F5005B5B52 /* PresenterViperMovieDB.framework */;
+			name = NetworkService;
+			productName = NetworkService;
+			productReference = 85EA240C2BAA22160013AA7B /* NetworkService.framework */;
 			productType = "com.apple.product-type.framework";
-		};
-		F906D6552BAA06F6005B5B52 /* PresenterViperMovieDBTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = F906D6632BAA06F6005B5B52 /* Build configuration list for PBXNativeTarget "PresenterViperMovieDBTests" */;
-			buildPhases = (
-				F906D6522BAA06F6005B5B52 /* Sources */,
-				F906D6532BAA06F6005B5B52 /* Frameworks */,
-				F906D6542BAA06F6005B5B52 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				F906D6592BAA06F6005B5B52 /* PBXTargetDependency */,
-			);
-			name = PresenterViperMovieDBTests;
-			productName = PresenterViperMovieDBTests;
-			productReference = F906D6562BAA06F6005B5B52 /* PresenterViperMovieDBTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		F906D6452BAA06F5005B5B52 /* Project object */ = {
+		85EA24032BAA22160013AA7B /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1510;
-				LastUpgradeCheck = 1510;
+				LastUpgradeCheck = 1520;
 				TargetAttributes = {
-					F906D64D2BAA06F5005B5B52 = {
-						CreatedOnToolsVersion = 15.1;
-					};
-					F906D6552BAA06F6005B5B52 = {
-						CreatedOnToolsVersion = 15.1;
+					85EA240B2BAA22160013AA7B = {
+						CreatedOnToolsVersion = 15.2;
 					};
 				};
 			};
-			buildConfigurationList = F906D6482BAA06F5005B5B52 /* Build configuration list for PBXProject "PresenterViperMovieDB" */;
+			buildConfigurationList = 85EA24062BAA22160013AA7B /* Build configuration list for PBXProject "NetworkService" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -158,26 +104,18 @@
 				en,
 				Base,
 			);
-			mainGroup = F906D6442BAA06F5005B5B52;
-			productRefGroup = F906D64F2BAA06F5005B5B52 /* Products */;
+			mainGroup = 85EA24022BAA22160013AA7B;
+			productRefGroup = 85EA240D2BAA22160013AA7B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				F906D64D2BAA06F5005B5B52 /* PresenterViperMovieDB */,
-				F906D6552BAA06F6005B5B52 /* PresenterViperMovieDBTests */,
+				85EA240B2BAA22160013AA7B /* NetworkService */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		F906D64C2BAA06F5005B5B52 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F906D6542BAA06F6005B5B52 /* Resources */ = {
+		85EA240A2BAA22160013AA7B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -187,33 +125,17 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		F906D64A2BAA06F5005B5B52 /* Sources */ = {
+		85EA24082BAA22160013AA7B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		F906D6522BAA06F6005B5B52 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				F906D65C2BAA06F6005B5B52 /* PresenterViperMovieDBTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTargetDependency section */
-		F906D6592BAA06F6005B5B52 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = F906D64D2BAA06F5005B5B52 /* PresenterViperMovieDB */;
-			targetProxy = F906D6582BAA06F6005B5B52 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
 /* Begin XCBuildConfiguration section */
-		F906D65E2BAA06F6005B5B52 /* Debug */ = {
+		85EA24112BAA22160013AA7B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -279,7 +201,7 @@
 			};
 			name = Debug;
 		};
-		F906D65F2BAA06F6005B5B52 /* Release */ = {
+		85EA24122BAA22160013AA7B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -338,13 +260,13 @@
 			};
 			name = Release;
 		};
-		F906D6612BAA06F6005B5B52 /* Debug */ = {
+		85EA24142BAA22160013AA7B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 2V5RBDFH46;
+				DEVELOPMENT_TEAM = K8P3CNSPZS;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -360,7 +282,7 @@
 				MARKETING_VERSION = 1.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
-				PRODUCT_BUNDLE_IDENTIFIER = PedroMullerApps.PresenterViperMovieDB;
+				PRODUCT_BUNDLE_IDENTIFIER = com.JoaoPauloCarneiro.NetworkService;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -369,13 +291,13 @@
 			};
 			name = Debug;
 		};
-		F906D6622BAA06F6005B5B52 /* Release */ = {
+		85EA24152BAA22160013AA7B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 2V5RBDFH46;
+				DEVELOPMENT_TEAM = K8P3CNSPZS;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -391,42 +313,10 @@
 				MARKETING_VERSION = 1.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
-				PRODUCT_BUNDLE_IDENTIFIER = PedroMullerApps.PresenterViperMovieDB;
+				PRODUCT_BUNDLE_IDENTIFIER = com.JoaoPauloCarneiro.NetworkService;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		F906D6642BAA06F6005B5B52 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 2V5RBDFH46;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = PedroMullerApps.PresenterViperMovieDBTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		F906D6652BAA06F6005B5B52 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 2V5RBDFH46;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = PedroMullerApps.PresenterViperMovieDBTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -435,34 +325,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		F906D6482BAA06F5005B5B52 /* Build configuration list for PBXProject "PresenterViperMovieDB" */ = {
+		85EA24062BAA22160013AA7B /* Build configuration list for PBXProject "NetworkService" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				F906D65E2BAA06F6005B5B52 /* Debug */,
-				F906D65F2BAA06F6005B5B52 /* Release */,
+				85EA24112BAA22160013AA7B /* Debug */,
+				85EA24122BAA22160013AA7B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		F906D6602BAA06F6005B5B52 /* Build configuration list for PBXNativeTarget "PresenterViperMovieDB" */ = {
+		85EA24132BAA22160013AA7B /* Build configuration list for PBXNativeTarget "NetworkService" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				F906D6612BAA06F6005B5B52 /* Debug */,
-				F906D6622BAA06F6005B5B52 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		F906D6632BAA06F6005B5B52 /* Build configuration list for PBXNativeTarget "PresenterViperMovieDBTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				F906D6642BAA06F6005B5B52 /* Debug */,
-				F906D6652BAA06F6005B5B52 /* Release */,
+				85EA24142BAA22160013AA7B /* Debug */,
+				85EA24152BAA22160013AA7B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = F906D6452BAA06F5005B5B52 /* Project object */;
+	rootObject = 85EA24032BAA22160013AA7B /* Project object */;
 }
