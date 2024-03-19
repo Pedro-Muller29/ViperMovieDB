@@ -55,14 +55,17 @@ enum BaseMovieDBURL {
         "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJjOTUwZjM0NWZlODRhMWNmNDJkZmRiYzYwNWIzMWY5NyIsInN1YiI6IjY0MjU4YjIyYzA0NDI5MDI2YjEyMzgzMiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.xeFA-BsIoEqdydWz3oKIWVdZ65sUeucX_fRvRGftuPs"
     ]
     
-    var url: URL? {
+    var request: URLRequest? {
         switch self {
         case let .movie(category, page):
-            return URL(string: "\(Self.movieURL)\(category.appendage)\(page != nil ? "&page=\(page!)" : "")")
+            guard let url = URL(string: "\(Self.movieURL)\(category.appendage)\(page != nil ? "&page=\(page!)" : "")") else { return nil }
+            return URLRequest(url: url)
         case let .image(size, appendage):
-            return URL(string: "\(Self.imageURL)/\(size.appendage)/\(appendage)")
+            guard let url = URL(string: "\(Self.imageURL)/\(size.appendage)/\(appendage)") else { return nil }
+            return URLRequest(url: url)
         case .genre:
-            return URL(string: Self.genreURL)
+            guard let url = URL(string: Self.genreURL) else { return nil }
+            return URLRequest(url: url)
         }
     }
 }
