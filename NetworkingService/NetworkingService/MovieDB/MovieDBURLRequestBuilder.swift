@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum BaseMovieDBURL {
+enum MovieDBURLRequestBuilder {
     enum ImageSize {
         case width(Int)
         case height(Int)
@@ -59,13 +59,19 @@ enum BaseMovieDBURL {
         switch self {
         case let .movie(category, page):
             guard let url = URL(string: "\(Self.movieURL)\(category.appendage)\(page != nil ? "&page=\(page!)" : "")") else { return nil }
-            return URLRequest(url: url)
+            var request = URLRequest(url: url)
+            request.allHTTPHeaderFields = Self.headers
+            return request
         case let .image(size, appendage):
             guard let url = URL(string: "\(Self.imageURL)/\(size.appendage)/\(appendage)") else { return nil }
-            return URLRequest(url: url)
+            var request = URLRequest(url: url)
+            request.allHTTPHeaderFields = Self.headers
+            return request
         case .genre:
             guard let url = URL(string: Self.genreURL) else { return nil }
-            return URLRequest(url: url)
+            var request = URLRequest(url: url)
+            request.allHTTPHeaderFields = Self.headers
+            return request
         }
     }
 }
