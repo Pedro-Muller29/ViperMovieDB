@@ -8,11 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		85EA24102BAA22160013AA7B /* NetworkService.h in Headers */ = {isa = PBXBuildFile; fileRef = 85EA240F2BAA22160013AA7B /* NetworkService.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A7EC79EE2BAA24A2003C81F2 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7EC79ED2BAA24A2003C81F2 /* NetworkService.swift */; };
+		A7EC79F12BAA24C2003C81F2 /* MovieDBURLBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7EC79F02BAA24C2003C81F2 /* MovieDBURLBuilder.swift */; };
+		A7EC79F32BAA24E7003C81F2 /* MovieDBToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7EC79F22BAA24E7003C81F2 /* MovieDBToken.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		85EA240C2BAA22160013AA7B /* NetworkService.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = NetworkService.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		85EA240F2BAA22160013AA7B /* NetworkService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetworkService.h; sourceTree = "<group>"; };
+		A7EC79ED2BAA24A2003C81F2 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		A7EC79F02BAA24C2003C81F2 /* MovieDBURLBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDBURLBuilder.swift; sourceTree = "<group>"; };
+		A7EC79F22BAA24E7003C81F2 /* MovieDBToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDBToken.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,8 +52,19 @@
 			isa = PBXGroup;
 			children = (
 				85EA240F2BAA22160013AA7B /* NetworkService.h */,
+				A7EC79ED2BAA24A2003C81F2 /* NetworkService.swift */,
+				A7EC79EF2BAA24B2003C81F2 /* MovieDB */,
 			);
 			path = NetworkService;
+			sourceTree = "<group>";
+		};
+		A7EC79EF2BAA24B2003C81F2 /* MovieDB */ = {
+			isa = PBXGroup;
+			children = (
+				A7EC79F02BAA24C2003C81F2 /* MovieDBURLBuilder.swift */,
+				A7EC79F22BAA24E7003C81F2 /* MovieDBToken.swift */,
+			);
+			path = MovieDB;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -93,6 +110,7 @@
 				TargetAttributes = {
 					85EA240B2BAA22160013AA7B = {
 						CreatedOnToolsVersion = 15.2;
+						LastSwiftMigration = 1530;
 					};
 				};
 			};
@@ -129,6 +147,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A7EC79F12BAA24C2003C81F2 /* MovieDBURLBuilder.swift in Sources */,
+				A7EC79F32BAA24E7003C81F2 /* MovieDBToken.swift in Sources */,
+				A7EC79EE2BAA24A2003C81F2 /* NetworkService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -263,6 +284,7 @@
 		85EA24142BAA22160013AA7B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
@@ -286,6 +308,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -294,6 +317,7 @@
 		85EA24152BAA22160013AA7B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
