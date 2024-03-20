@@ -17,12 +17,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: windowScene)
         let vc = ItemListView()
         let interactor = InteractorMovie()
+        let navigation = UINavigationController()
         let presenter = TablePresenter(iteractor: interactor, view: vc)
         interactor.presenter = presenter
         presenter.iteractor = interactor
         vc.presenter = presenter
+        navigation.viewControllers = [vc]
+        window.rootViewController = navigation
 //        vc.presenter?.view = vc
-        window.rootViewController = vc
         window.makeKeyAndVisible()
         self.window = window
     }

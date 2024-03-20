@@ -17,6 +17,9 @@ class ImageTitleDescriptionRatingTableViewCell: UITableViewCell {
         imageView.contentMode = .scaleAspectFit
         imageView.image = UIImage(systemName: "questionmark")
         imageView.tintColor = .label
+        imageView.backgroundColor = .secondaryLabel
+        imageView.layer.cornerRadius = 10
+        imageView.clipsToBounds = true
         return imageView
     }()
     

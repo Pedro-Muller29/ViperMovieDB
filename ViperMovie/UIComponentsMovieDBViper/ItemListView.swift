@@ -18,6 +18,7 @@ class ItemListView: UIViewController, AnyView {
         tableView.backgroundColor = .systemBackground
         tableView.allowsSelection = true
         tableView.register(ImageTitleDescriptionRatingTableViewCell.self, forCellReuseIdentifier: ImageTitleDescriptionRatingTableViewCell.identifier)
+        tableView.separatorStyle = .none
         return tableView
     }()
     
@@ -30,7 +31,7 @@ class ItemListView: UIViewController, AnyView {
         // Do any additional setup after loading the view.
     }
 
-    // MARK: Setup UI
+    // MARK: Setup UIS
     func setupUI() {
         view.backgroundColor = .red
         view.addSubview(tableView)
@@ -38,9 +39,12 @@ class ItemListView: UIViewController, AnyView {
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.topAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+            tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
         ])
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+        self.navigationItem.title = "Movies"
+        self.navigationItem.searchController = UISearchController()
     }
     
     // MARK: Updating
