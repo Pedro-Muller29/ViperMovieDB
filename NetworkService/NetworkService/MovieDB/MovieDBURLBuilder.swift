@@ -28,6 +28,8 @@ public enum MovieDBURLRequestBuilder {
     public enum MovieCategory {
         case popular
         case topRated
+        case nowPlaying
+        case upcoming
         case details(_ id: Int)
         
         var appendage: String {
@@ -36,6 +38,10 @@ public enum MovieDBURLRequestBuilder {
                 return "popular"
             case .topRated:
                 return "top_rated"
+            case .nowPlaying:
+                return "now_playing"
+            case .upcoming:
+                return "upcoming"
             case .details(let id):
                 return "\(id)"
             }
