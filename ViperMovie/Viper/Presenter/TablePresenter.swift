@@ -34,14 +34,16 @@ protocol TablePresenterProtocol: AnyPresenter {
     
     func touchedCellAt(indexPath: IndexPath)
     
-    func getNextPage() async
+    func getNextPage(sectionIndex: Int)
     
 }
 
-class TablePresenter: TablePresenterProtocol {    
+class TablePresenter: TablePresenterProtocol {
     var iteractor: InteractorMovie?
     var router: Router?
     var view: ItemListView?
+    
+    var gettingNextPage: Bool = false
     
     internal var sections: [SectionTable] = []
     
@@ -62,9 +64,13 @@ class TablePresenter: TablePresenterProtocol {
     }
     
     func getDataForCell(identifier: String, indexPath: IndexPath) -> Entity {
-        let section = indexPath.section
+        let sectionIndex = indexPath.section
+        let section = sections[sectionIndex]
         let row = indexPath.row
-        return sections[section].entities[row]
+        if row >= (section.entities.count - 5) && !gettingNextPage && sectionIndex == 0 {
+            self.getNextPage(sectionIndex: sectionIndex)
+        }
+        return section.entities[row]
     }
     
     func touchedCellAt(indexPath: IndexPath) {
@@ -75,8 +81,23 @@ class TablePresenter: TablePresenterProtocol {
         self.iteractor?.refreshData()
     }
     
-    func getNextPage() async {
+    func getNextPage(sectionIndex: Int) {
+        self.gettingNextPage = true
+        let dispatchGroup = DispatchGroup()
         
+        sections[sectionIndex].page += 1
+        
+        dispatchGroup.enter()
+        self.iteractor?.getNextPage(page: sections[sectionIndex].page, completion: { itens in
+            self.sections[sectionIndex].entities.append(contentsOf: itens)
+            dispatchGroup.leave()
+        })
+        
+        dispatchGroup.notify(queue: .main) {
+            self.view?.update()
+            print("JORGE \(self.sections[sectionIndex].entities.count), page: \(self.sections[sectionIndex].page)")
+            self.gettingNextPage = false
+        }
     }
     
     init(iteractor: InteractorProtocol? = nil, router: RouterProtocol? = nil, view: ViewProtocol? = nil) {
