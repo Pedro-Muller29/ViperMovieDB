@@ -58,7 +58,7 @@ public enum MovieDBURLRequestBuilder {
     public var request: URLRequest? {
         switch self {
         case let .movie(category, page):
-            guard let url = URL(string: "\(Self.movieURL)\(category.appendage)\(page != nil ? "&page=\(page!)" : "")") else { return nil }
+            guard let url = URL(string: "\(Self.movieURL)\(category.appendage)\(page != nil ? "?page=\(page!)" : "")") else { return nil }
             var request = URLRequest(url: url)
             request.allHTTPHeaderFields = Self.headers
             return request

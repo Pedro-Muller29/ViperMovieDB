@@ -47,13 +47,12 @@ public struct NetworkService {
                     let newData = try JSONSerialization.data(withJSONObject: dicts, options: [.sortedKeys, .withoutEscapingSlashes])
                     
                     let decoder = JSONDecoder()
-                    decoder.keyDecodingStrategy = .convertFromSnakeCase
                     
                     let result = try decoder.decode([T].self, from: newData)
                     return completion(.success(result))
                 }
                 
-            } catch let er as DecodingError {
+            } catch let err as DecodingError {
                 return completion(.failure(URLError(.downloadDecodingFailedToComplete)))
             } catch {
                 return completion(.failure(URLError(.unknown)))
@@ -73,13 +72,12 @@ public struct NetworkService {
             }
             
             let decoder = JSONDecoder()
-            decoder.keyDecodingStrategy = .convertFromSnakeCase
             
             do {
                 let decodedData = try decoder.decode(T.self, from: data)
                 completion(.success(decodedData))
                 
-            } catch let er as DecodingError {
+            } catch _ as DecodingError {
                 return completion(.failure(URLError(.downloadDecodingFailedToComplete)))
             } catch {
                 return completion(.failure(URLError(.unknown)))
