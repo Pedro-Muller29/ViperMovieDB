@@ -7,10 +7,10 @@
 
 import Foundation
 
-public protocol TablePresenterProtocol: AnyPresenter {
+protocol TablePresenterProtocol: AnyPresenter {
     var iteractor: AnyInteractor? { get set }
     var router: AnyRouter? { get set }
-    var view: AnyView? { get set }
+    var view: (any AnyView)? { get set }
     
     func getNumberOfSections() -> Int
     
@@ -24,28 +24,28 @@ public protocol TablePresenterProtocol: AnyPresenter {
     
 }
 
-public class TablePresenter: TablePresenterProtocol {
-    public var iteractor: AnyInteractor?
-    public var router: AnyRouter?
-    public var view: AnyView?
+class TablePresenter: TablePresenterProtocol {
+    var iteractor: AnyInteractor?
+    var router: AnyRouter?
+    var view: (any AnyView)?
     
-    public func getNumberOfSections() -> Int {
+    func getNumberOfSections() -> Int {
         return 0
     }
     
-    public func getNumberOfRows(for: Int) -> Int {
+    func getNumberOfRows(for: Int) -> Int {
         return 0
     }
     
-    public func getDataForCell(identifier: String, indexPath: IndexPath) -> Entity {
+    func getDataForCell(identifier: String, indexPath: IndexPath) -> Entity {
         return MovieEntity(name: "", overview: "", rating: "", genres: [], genresIds: [], urlPath: "")
     }
     
-    public func touchedCellAt(indexPath: IndexPath) {
+    func touchedCellAt(indexPath: IndexPath) {
         
     }
     
-    public func getNextPage() {
+    func getNextPage() {
         
     }
     

@@ -250,7 +250,6 @@
 				852F93952BAA2515006E3CAC /* Entity.swift in Sources */,
 				852F93962BAA2515006E3CAC /* MovieEntity.swift in Sources */,
 				852F93922BAA2503006E3CAC /* AnyView.swift in Sources */,
-				85EA23ED2BAA214A0013AA7B /* ViewController.swift in Sources */,
 				85EA23E92BAA214A0013AA7B /* AppDelegate.swift in Sources */,
 				F906D6982BAA24AE005B5B52 /* ImageTitleDescriptionRatingTableViewCell.swift in Sources */,
 				85EA23EB2BAA214A0013AA7B /* SceneDelegate.swift in Sources */,

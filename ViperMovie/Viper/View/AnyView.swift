@@ -8,5 +8,6 @@
 import Foundation
 
 public protocol AnyView {
-    var presenter: AnyPresenter? { get set }
+    associatedtype Presenter: AnyPresenter
+    var presenter: Presenter? { get set }
 }

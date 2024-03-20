@@ -7,8 +7,8 @@
 
 import UIKit
 
-class ItemListView: UIViewController {
-    
+class ItemListView: UIViewController, AnyView {
+
     // MARK: Presenter reference
     var presenter: TablePresenter?
     
@@ -52,7 +52,7 @@ extension ItemListView: UITableViewDelegate, UITableViewDataSource {
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ImageTitleDescriptionRatingTableViewCell.identifier, for: indexPath)
                 as? ImageTitleDescriptionRatingTableViewCell else { return UITableViewCell() }
-        
+        cell.data = presenter?.getDataForCell(identifier: ImageTitleDescriptionRatingTableViewCell.identifier, indexPath: indexPath)
         return cell
     }
     
