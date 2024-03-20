@@ -11,56 +11,50 @@ class ImageTitleDescriptionRatingTableViewCell: UITableViewCell {
 
     static var identifier: String = "CELL"
     
-    var data: Entity?
+    
+    private let image: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFit
+        imageView.image = UIImage(systemName: "questionmark")
+        imageView.tintColor = .label
+        return imageView
+    }()
+    
+    private let title: UILabel = {
+        let label = UILabel()
+        label.textColor = .label
+        label.textAlignment = .left
+        label.font = .systemFont(ofSize: 14, weight: .bold)
+        label.text = "Title"
+        return label
+    }()
+    
+    private let overview: UILabel = {
+        let description = UILabel()
+        description.textColor = .secondaryLabel
+        description.textAlignment = .left
+        description.font = .systemFont(ofSize: 13, weight: .regular)
+        description.text = "Overview Overview Overview Overview Overview Overview Overview Overview Overview Overview Overview Overview Overview Overview Overview Overview Overview Overview Overview Overview Overview Overview Overview Overview Overview Overview Overview Overview "
+        description.numberOfLines = 3
+        return description
+    }()
+    
+//    private let ratings: UIStackView = {
+//        let ratings = UIStackView()
+//        ratings.axis = .horizontal
+//        
+//    }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.setupUI()
     }
     
-    lazy private var image: UIImageView = {
-        let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
-        if let data = data?.image,
-           let image = UIImage(data: data) {
-            imageView.image = image
-        } else {
-            imageView.image = UIImage(systemName: "questionmark")
-            imageView.tintColor = .label
-        }
-        return imageView
-    }()
-    
-    lazy private var title: UILabel = {
-        let label = UILabel()
-        label.textColor = .label
-        label.textAlignment = .left
-        label.font = .systemFont(ofSize: 14, weight: .bold)
-        label.text = data?.name
-        return label
-    }()
-    
-    lazy private var overview: UILabel = {
-        let description = UILabel()
-        description.textColor = .secondaryLabel
-        description.textAlignment = .left
-        description.font = .systemFont(ofSize: 13, weight: .regular)
-        description.text = data?.overview
-        description.numberOfLines = 3
-        return description
-    }()
-    
-//    lazy private var ratings: UIStackView = {
-//        let ratings = UIStackView()
-//        ratings.axis = .horizontal
-//    }()
-    
     func setupUI() {
         self.contentView.addSubview(image)
         let stack = UIStackView()
         stack.addSubview(title)
         stack.addSubview(overview)
-        stack.distribution = .equalSpacing
         self.contentView.addSubview(stack)
         
         image.translatesAutoresizingMaskIntoConstraints = false
@@ -81,8 +75,10 @@ class ImageTitleDescriptionRatingTableViewCell: UITableViewCell {
             stack.trailingAnchor.constraint(equalTo: self.contentView.layoutMarginsGuide.trailingAnchor),
             
             title.leadingAnchor.constraint(equalTo: stack.leadingAnchor),
+            title.topAnchor.constraint(equalTo: stack.topAnchor, constant: 8),
             title.trailingAnchor.constraint(equalTo: stack.trailingAnchor),
             
+            overview.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 8),
             overview.leadingAnchor.constraint(equalTo: stack.leadingAnchor),
             overview.trailingAnchor.constraint(equalTo: stack.trailingAnchor)
         ])
