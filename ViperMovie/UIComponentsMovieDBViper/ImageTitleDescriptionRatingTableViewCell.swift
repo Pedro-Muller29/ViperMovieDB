@@ -39,11 +39,31 @@ class ImageTitleDescriptionRatingTableViewCell: UITableViewCell {
         return description
     }()
     
-//    private let ratings: UIStackView = {
-//        let ratings = UIStackView()
-//        ratings.axis = .horizontal
-//        
-//    }
+    private let ratingsLabel: UILabel = {
+        var ratingsLabel = UILabel()
+        ratingsLabel.text = "0.0"
+        ratingsLabel.textColor = .secondaryLabel
+        ratingsLabel.numberOfLines = 1
+        ratingsLabel.font = .systemFont(ofSize: 12, weight: .light)
+        return ratingsLabel
+    }()
+    
+    private let ratingsStar: UIImageView = {
+        var ratingsStar = UIImageView(image: UIImage(systemName: "star"))
+        ratingsStar.contentMode = .scaleAspectFit
+        ratingsStar.tintColor = .secondaryLabel
+        return ratingsStar
+    }()
+    
+    func updateUI(with data: Entity) {
+        if let data = data.image,
+           let uiImage = UIImage(data: data) {
+            image.image = uiImage
+        }
+        title.text = data.name
+        overview.text = data.overview
+        ratingsLabel.text = String(format: "%.1f", data.rating)
+    }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -55,12 +75,16 @@ class ImageTitleDescriptionRatingTableViewCell: UITableViewCell {
         let stack = UIStackView()
         stack.addSubview(title)
         stack.addSubview(overview)
+        stack.addSubview(ratingsStar)
+        stack.addSubview(ratingsLabel)
         self.contentView.addSubview(stack)
         
         image.translatesAutoresizingMaskIntoConstraints = false
         title.translatesAutoresizingMaskIntoConstraints = false
         overview.translatesAutoresizingMaskIntoConstraints = false
         stack.translatesAutoresizingMaskIntoConstraints = false
+        ratingsLabel.translatesAutoresizingMaskIntoConstraints = false
+        ratingsStar.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
             image.topAnchor.constraint(equalTo: self.contentView.layoutMarginsGuide.topAnchor),
@@ -80,7 +104,16 @@ class ImageTitleDescriptionRatingTableViewCell: UITableViewCell {
             
             overview.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 8),
             overview.leadingAnchor.constraint(equalTo: stack.leadingAnchor),
-            overview.trailingAnchor.constraint(equalTo: stack.trailingAnchor)
+            overview.trailingAnchor.constraint(equalTo: stack.trailingAnchor),
+            
+            ratingsLabel.bottomAnchor.constraint(equalTo: stack.bottomAnchor, constant: -8),
+            ratingsLabel.leadingAnchor.constraint(equalTo: ratingsStar.trailingAnchor, constant: 4),
+            ratingsLabel.trailingAnchor.constraint(equalTo: stack.trailingAnchor),
+            
+            ratingsStar.leadingAnchor.constraint(equalTo: stack.leadingAnchor),
+            ratingsStar.bottomAnchor.constraint(equalTo: stack.bottomAnchor, constant: -8),
+            ratingsStar.heightAnchor.constraint(equalToConstant: 13),
+            ratingsStar.widthAnchor.constraint(equalToConstant: 12.92)
         ])
     }
     

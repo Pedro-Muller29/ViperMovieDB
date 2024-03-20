@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import NetworkService
 
 
 protocol AnyPresenter {
@@ -23,8 +24,6 @@ protocol AnyPresenter {
 }
 
 protocol TablePresenterProtocol: AnyPresenter {
-    var page: Int { get set }
-    
     var sections: [SectionTable] { get set }
     
     func getNumberOfSections() -> Int
@@ -42,22 +41,53 @@ protocol TablePresenterProtocol: AnyPresenter {
 class TablePresenter: TablePresenterProtocol {    
     var iteractor: InteractorMovie?
     var router: Router?
-    var view: View?
-    
-    internal var page: Int = 1
+    var view: ItemListView?
     
     internal var sections: [SectionTable] = []
+    
+//    lazy var array: [MovieEntity] = {
+//        guard let request = MovieDBURLRequestBuilder.movie(category: .popular, page: 1).request else { return [] }
+//        NetworkService.fetch(request: request) { (result: Result<[MovieEntity], any Error>) in
+//            DispatchQueue.main.async { [weak self] in
+//                guard let self = self else { return }
+//                switch result {
+//                case .success(let success):
+//                    self.array = success
+//                    print(success.count)
+//                    self.view?.update()
+//                case .failure(let failure):
+//                    return
+//                }
+//            }
+//        }
+//        return []
+//    }()
+    
+    func reloadSections(newSections: [SectionTable]) {
+        print(newSections.count)
+        for section in newSections {
+            print(section.entities.count)
+        }
+        self.sections = newSections
+        self.view?.update()
+        print("deu reload")
+    }
     
     func getNumberOfSections() -> Int {
         return sections.count
     }
     
     func getNumberOfRows(sectionNumber: Int) -> Int {
+        if getNumberOfSections() == 0 {
+            return 0
+        }
         return sections[sectionNumber].entities.count
     }
     
     func getDataForCell(identifier: String, indexPath: IndexPath) -> Entity {
-        return MovieEntity(name: "Carros 2", overview: "Baita filme", rating: 1.0, genres: [], genreIds: [], urlPath: "")
+        let section = indexPath.section
+        let row = indexPath.row
+        return sections[section].entities[row]
     }
     
     func touchedCellAt(indexPath: IndexPath) {
@@ -65,18 +95,19 @@ class TablePresenter: TablePresenterProtocol {
     }
     
     func refreshTableContent() {
-        
+        print("refreshhhhhh")
+        self.iteractor?.refreshData()
     }
     
     func getNextPage() async {
         
     }
     
-    init(iteractor: InteractorProtocol, router: RouterProtocol, view: ViewProtocol, page: Int, sections: [SectionTable]) {
+    init(iteractor: InteractorProtocol? = nil, router: RouterProtocol? = nil, view: ViewProtocol? = nil) {
         self.iteractor = iteractor
         self.router = router
         self.view = view
-        self.page = page
-        self.sections = sections
+        self.sections = []
+        self.refreshTableContent()
     }
 }

@@ -10,12 +10,16 @@ import Foundation
 protocol AnyView {
     associatedtype PresenterProtocol where PresenterProtocol: AnyPresenter
     var presenter: PresenterProtocol? { get set }
+    func update()
 }
 
 class View: AnyView {
     var presenter: TablePresenter?
     
-    init(presenter: PresenterProtocol) {
+    init(presenter: PresenterProtocol? = nil) {
         self.presenter = presenter
+    }
+    
+    func update() {
     }
 }

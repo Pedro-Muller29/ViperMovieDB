@@ -16,6 +16,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
         let vc = ItemListView()
+        let interactor = InteractorMovie()
+        let presenter = TablePresenter(iteractor: interactor, view: vc)
+        interactor.presenter = presenter
+        presenter.iteractor = interactor
+        vc.presenter = presenter
+//        vc.presenter?.view = vc
         window.rootViewController = vc
         window.makeKeyAndVisible()
         self.window = window
