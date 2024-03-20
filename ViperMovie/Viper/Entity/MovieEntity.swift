@@ -7,12 +7,20 @@
 
 import Foundation
 
-struct MovieEntity: Entity {
+struct MovieEntity: Entity, Codable {
+    private enum CodingKeys: String, CodingKey {
+        case name = "title"
+        case overview
+        case rating = "vote_average"
+        case genreIds = "genre_ids"
+        case urlPath = "poster_path"
+    }
+    
     var name: String
     var overview: String
-    var rating: String
-    var genres: [String]
-    var genresIds: [Int]
-    var image: Data?
+    var rating: Float
+    var genres: [String] = []
+    var genreIds: [Int]
+    var image: Data? = nil
     var urlPath: String
 }
