@@ -9,16 +9,16 @@ import Foundation
 import NetworkService
 
 
-protocol AnyPresenter {
+public protocol AnyPresenter: AnyObject {
     associatedtype InteractorProtocol where InteractorProtocol: AnyInteractor
     
-    associatedtype RouterProtocol where RouterProtocol: AnyRouter
+ //   associatedtype RouterProtocol where RouterProtocol: AnyRouter
     
     associatedtype ViewProtocol where ViewProtocol: AnyView
     
     var iteractor: InteractorProtocol? { get set }
     
-    var router: RouterProtocol? { get set }
+    var router: AnyRouter? { get set }
     
     var view: ViewProtocol? { get set }
 }
@@ -38,9 +38,9 @@ protocol TablePresenterProtocol: AnyPresenter {
     
 }
 
-class TablePresenter: TablePresenterProtocol {    
+class TablePresenter: TablePresenterProtocol {
     var iteractor: InteractorMovie?
-    var router: Router?
+    var router: AnyRouter?
     var view: ItemListView?
     
     internal var sections: [SectionTable] = []
@@ -72,18 +72,17 @@ class TablePresenter: TablePresenterProtocol {
     }
     
     func refreshTableContent() {
-        self.iteractor?.refreshData()
+        iteractor?.refreshData()
     }
     
     func getNextPage() async {
         
     }
     
-    init(iteractor: InteractorProtocol? = nil, router: RouterProtocol? = nil, view: ViewProtocol? = nil) {
+    init(iteractor: InteractorMovie? = nil, router: AnyRouter? = nil, view: ItemListView? = nil) {
         self.iteractor = iteractor
         self.router = router
         self.view = view
         self.sections = []
-        self.refreshTableContent()
     }
 }
