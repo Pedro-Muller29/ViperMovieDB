@@ -11,5 +11,5 @@ import Foundation
 public protocol AnyPresenter {
     var iteractor: AnyInteractor? { get set }
     var router: AnyRouter? { get set }
-    var view: AnyView? { get set }
+    var view: (any AnyView)? { get set }
 }

@@ -6,11 +6,12 @@
 //
 
 import Foundation
+import NetworkService
 
-public protocol TablePresenterProtocol: AnyPresenter {
+protocol TablePresenterProtocol: AnyPresenter {
     var iteractor: AnyInteractor? { get set }
     var router: AnyRouter? { get set }
-    var view: AnyView? { get set }
+    var view: (any AnyView)? { get set }
     
     func getNumberOfSections() -> Int
     
@@ -24,28 +25,46 @@ public protocol TablePresenterProtocol: AnyPresenter {
     
 }
 
-public class TablePresenter: TablePresenterProtocol {
-    public var iteractor: AnyInteractor?
-    public var router: AnyRouter?
-    public var view: AnyView?
+class TablePresenter: TablePresenterProtocol {
+    var iteractor: AnyInteractor?
+    var router: AnyRouter?
+    var view: (any AnyView)?
     
-    public func getNumberOfSections() -> Int {
-        return 0
+    lazy var array: [MovieEntity] = {
+        guard let request = MovieDBURLRequestBuilder.movie(category: .popular, page: 1).request else { return [] }
+        NetworkService.fetch(request: request) { (result: Result<[MovieEntity], any Error>) in
+            DispatchQueue.main.async { [weak self] in
+                guard let self = self else { return }
+                switch result {
+                case .success(let success):
+                    self.array = success
+                    print(success.count)
+                    self.view?.update()
+                case .failure(let failure):
+                    return
+                }
+            }
+        }
+        return []
+    }()
+    
+    func getNumberOfSections() -> Int {
+        return 1
     }
     
-    public func getNumberOfRows(for: Int) -> Int {
-        return 0
+    func getNumberOfRows(for: Int) -> Int {
+        return array.count
     }
     
-    public func getDataForCell(identifier: String, indexPath: IndexPath) -> Entity {
-        return MovieEntity(name: "", overview: "", rating: 0.0, genres: [], genreIds: [], urlPath: "")
+    func getDataForCell(identifier: String, indexPath: IndexPath) -> Entity {
+        return array[indexPath.row]
     }
     
-    public func touchedCellAt(indexPath: IndexPath) {
+    func touchedCellAt(indexPath: IndexPath) {
         
     }
     
-    public func getNextPage() {
+    func getNextPage() {
         
     }
     
