@@ -45,32 +45,9 @@ class TablePresenter: TablePresenterProtocol {
     
     internal var sections: [SectionTable] = []
     
-//    lazy var array: [MovieEntity] = {
-//        guard let request = MovieDBURLRequestBuilder.movie(category: .popular, page: 1).request else { return [] }
-//        NetworkService.fetch(request: request) { (result: Result<[MovieEntity], any Error>) in
-//            DispatchQueue.main.async { [weak self] in
-//                guard let self = self else { return }
-//                switch result {
-//                case .success(let success):
-//                    self.array = success
-//                    print(success.count)
-//                    self.view?.update()
-//                case .failure(let failure):
-//                    return
-//                }
-//            }
-//        }
-//        return []
-//    }()
-    
     func reloadSections(newSections: [SectionTable]) {
-        print(newSections.count)
-        for section in newSections {
-            print(section.entities.count)
-        }
         self.sections = newSections
         self.view?.update()
-        print("deu reload")
     }
     
     func getNumberOfSections() -> Int {
@@ -95,7 +72,6 @@ class TablePresenter: TablePresenterProtocol {
     }
     
     func refreshTableContent() {
-        print("refreshhhhhh")
         self.iteractor?.refreshData()
     }
     

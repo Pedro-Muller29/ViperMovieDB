@@ -33,7 +33,6 @@ class InteractorMovie: InteractorMovieProtocol {
     func refreshData() {
         self.sections = []
         let dispatchGroup = DispatchGroup()
-        print("guard let de merda")
         guard let requestNowPlaying = MovieDBURLRequestBuilder.movie(category: .nowPlaying, page: 1).request else { return }
         dispatchGroup.enter()
         NetworkService.fetch(request: requestNowPlaying) { (result: Result<[MovieEntity], any Error>) in
@@ -61,9 +60,7 @@ class InteractorMovie: InteractorMovieProtocol {
             self.sections.insert(SectionTable(name: "Popular Movies", page: 1, entities: movies), at: 0)
             dispatchGroup.leave()
         }
-        print("ESPERANDO RETORNO")
         dispatchGroup.notify(queue: .global(qos: .userInteractive)) {
-            print("DEU INTERACTOR PARA RECEBER")
             self.presenter?.reloadSections(newSections: self.sections)
         }
     }
