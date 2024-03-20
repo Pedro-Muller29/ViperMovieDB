@@ -10,4 +10,6 @@ import Foundation
 public protocol AnyView {
     associatedtype Presenter: AnyPresenter
     var presenter: Presenter? { get set }
+    
+    func update()
 }

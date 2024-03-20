@@ -16,6 +16,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
         let vc = ItemListView()
+        vc.presenter = TablePresenter()
+        vc.presenter?.view = vc
         window.rootViewController = vc
         window.makeKeyAndVisible()
         self.window = window

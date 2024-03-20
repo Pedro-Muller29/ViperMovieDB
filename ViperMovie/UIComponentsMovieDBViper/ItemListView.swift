@@ -8,7 +8,7 @@
 import UIKit
 
 class ItemListView: UIViewController, AnyView {
-
+    
     // MARK: Presenter reference
     var presenter: TablePresenter?
     
@@ -42,6 +42,11 @@ class ItemListView: UIViewController, AnyView {
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
     }
+    
+    // MARK: Updating
+    func update() {
+        self.tableView.reloadData()
+    }
 }
 
 extension ItemListView: UITableViewDelegate, UITableViewDataSource {
@@ -53,6 +58,9 @@ extension ItemListView: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ImageTitleDescriptionRatingTableViewCell.identifier, for: indexPath)
                 as? ImageTitleDescriptionRatingTableViewCell else { return UITableViewCell() }
 //        cell.data = presenter?.getDataForCell(identifier: ImageTitleDescriptionRatingTableViewCell.identifier, indexPath: indexPath)
+        if let entity = presenter?.getDataForCell(identifier: ImageTitleDescriptionRatingTableViewCell.identifier, indexPath: indexPath) {
+            cell.updateUI(with: entity)
+        }
         return cell
     }
     
