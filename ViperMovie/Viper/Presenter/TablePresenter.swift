@@ -7,10 +7,26 @@
 
 import Foundation
 
-public protocol TablePresenterProtocol: AnyPresenter {
-    var iteractor: AnyInteractor? { get set }
-    var router: AnyRouter? { get set }
-    var view: AnyView? { get set }
+
+
+protocol AnyPresenter {
+    associatedtype InteractorProtocol where InteractorProtocol: AnyInteractor
+    
+    associatedtype RouterProtocol where RouterProtocol: AnyRouter
+    
+    associatedtype ViewProtocol where ViewProtocol: AnyView
+    
+    var iteractor: InteractorProtocol? { get set }
+    
+    var router: RouterProtocol? { get set }
+    
+    var view: ViewProtocol? { get set }
+}
+
+protocol TablePresenterProtocol: AnyPresenter {
+    var page: Int { get set }
+    
+    var entities: [any Entity] { get set }
     
     func getNumberOfSections() -> Int
     
@@ -20,33 +36,44 @@ public protocol TablePresenterProtocol: AnyPresenter {
     
     func touchedCellAt(indexPath: IndexPath)
     
-    func getNextPage()
+    func getNextPage() async
     
 }
 
-public class TablePresenter: TablePresenterProtocol {
-    public var iteractor: AnyInteractor?
-    public var router: AnyRouter?
-    public var view: AnyView?
+class TablePresenter: TablePresenterProtocol {    
+    var iteractor: InteractorMovie?
+    var router: Router?
+    var view: View?
     
-    public func getNumberOfSections() -> Int {
+    internal var page: Int = 0
+    
+    internal var entities: [any Entity] = []
+    
+    func getNumberOfSections() -> Int {
         return 0
     }
     
-    public func getNumberOfRows(for: Int) -> Int {
+    func getNumberOfRows(for: Int) -> Int {
         return 0
     }
     
-    public func getDataForCell(identifier: String, indexPath: IndexPath) -> Entity {
+    func getDataForCell(identifier: String, indexPath: IndexPath) -> Entity {
         return MovieEntity(name: "", overview: "", rating: "", genres: [], genresIds: [], urlPath: "")
     }
     
-    public func touchedCellAt(indexPath: IndexPath) {
+    func touchedCellAt(indexPath: IndexPath) {
         
     }
     
-    public func getNextPage() {
+    func getNextPage() async {
         
     }
     
+    init(iteractor: InteractorProtocol, router: RouterProtocol, view: ViewProtocol, page: Int, entities: [any Entity]) {
+        self.iteractor = iteractor
+        self.router = router
+        self.view = view
+        self.page = page
+        self.entities = entities
+    }
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-public protocol Entity {
+protocol Entity {
     var name: String { get }
     var overview: String { get }
     var rating: String { get }

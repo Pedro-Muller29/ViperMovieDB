@@ -10,3 +10,7 @@ import Foundation
 public protocol AnyRouter {
     
 }
+
+class Router: AnyRouter {
+    
+}

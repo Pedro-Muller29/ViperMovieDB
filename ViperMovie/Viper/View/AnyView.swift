@@ -7,6 +7,15 @@
 
 import Foundation
 
-public protocol AnyView {
-    var presenter: AnyPresenter? { get set }
+protocol AnyView {
+    associatedtype PresenterProtocol where PresenterProtocol: AnyPresenter
+    var presenter: PresenterProtocol? { get set }
+}
+
+class View: AnyView {
+    var presenter: TablePresenter?
+    
+    init(presenter: PresenterProtocol) {
+        self.presenter = presenter
+    }
 }
