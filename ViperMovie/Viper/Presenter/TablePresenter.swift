@@ -8,7 +8,6 @@
 import Foundation
 
 
-
 protocol AnyPresenter {
     associatedtype InteractorProtocol where InteractorProtocol: AnyInteractor
     
@@ -26,11 +25,11 @@ protocol AnyPresenter {
 protocol TablePresenterProtocol: AnyPresenter {
     var page: Int { get set }
     
-    var entities: [any Entity] { get set }
+    var sections: [SectionTable] { get set }
     
     func getNumberOfSections() -> Int
     
-    func getNumberOfRows(for: Int) -> Int
+    func getNumberOfRows(sectionNumber: Int) -> Int
     
     func getDataForCell(identifier: String, indexPath: IndexPath) -> Entity
     
@@ -45,16 +44,16 @@ class TablePresenter: TablePresenterProtocol {
     var router: Router?
     var view: View?
     
-    internal var page: Int = 0
+    internal var page: Int = 1
     
-    internal var entities: [any Entity] = []
+    internal var sections: [SectionTable] = []
     
     func getNumberOfSections() -> Int {
-        return 0
+        return sections.count
     }
     
-    func getNumberOfRows(for: Int) -> Int {
-        return 0
+    func getNumberOfRows(sectionNumber: Int) -> Int {
+        return sections[sectionNumber].entities.count
     }
     
     func getDataForCell(identifier: String, indexPath: IndexPath) -> Entity {
@@ -65,15 +64,19 @@ class TablePresenter: TablePresenterProtocol {
         
     }
     
+    func refreshTableContent() {
+        
+    }
+    
     func getNextPage() async {
         
     }
     
-    init(iteractor: InteractorProtocol, router: RouterProtocol, view: ViewProtocol, page: Int, entities: [any Entity]) {
+    init(iteractor: InteractorProtocol, router: RouterProtocol, view: ViewProtocol, page: Int, sections: [SectionTable]) {
         self.iteractor = iteractor
         self.router = router
         self.view = view
         self.page = page
-        self.entities = entities
+        self.sections = sections
     }
 }

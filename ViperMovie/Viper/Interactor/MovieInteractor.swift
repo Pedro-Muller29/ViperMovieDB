@@ -18,8 +18,8 @@ protocol AnyInteractor {
 
 protocol InteractorMovieProtocol: AnyInteractor {
     var network: NetworkService? { get set }
-    var entities: [Entity] { get set }
-    func getNextPage(page: Int) async -> [MovieEntity]
+    var sections: [SectionTable] { get set }
+    func getNextPage(page: Int, completion: @escaping([MovieEntity]) -> Void)
 }
 
 class InteractorMovie: InteractorMovieProtocol {
@@ -28,10 +28,17 @@ class InteractorMovie: InteractorMovieProtocol {
     
     var network: NetworkService?
     
-    var entities: [Entity] = []
+    var sections: [SectionTable] = []
     
-    func getNextPage(page: Int) async -> [MovieEntity] {
-        return []
+    func getNextPage(page: Int, completion: @escaping([MovieEntity]) -> Void) {
+        guard let request = MovieDBURLRequestBuilder.movie(category: .popular, page: page).request else { return }
+        NetworkService.fetch(request: request) { (result: Result<[MovieEntity], any Error>) in
+            switch result {
+            case .success(let success):
+                completion(success)
+            case .failure(let failure):
+                completion([])
+            }
+        }
     }
-    
 }

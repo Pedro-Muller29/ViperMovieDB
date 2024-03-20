@@ -14,3 +14,5 @@ protocol Entity {
     var genres: [String] { get }
     var image: Data? { get }
 }
+
+
