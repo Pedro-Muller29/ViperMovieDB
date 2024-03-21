@@ -9,7 +9,7 @@ import Foundation
 import NetworkService
 
 
-public protocol AnyInteractor {
+protocol AnyInteractor {
    associatedtype PresenterProtocol where PresenterProtocol: AnyPresenter
     var presenter: PresenterProtocol? { get set }
 }

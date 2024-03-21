@@ -9,7 +9,7 @@ import Foundation
 import NetworkService
 
 
-public protocol AnyPresenter: AnyObject {
+protocol AnyPresenter: AnyObject {
     associatedtype InteractorProtocol where InteractorProtocol: AnyInteractor
     
     associatedtype RouterProtocol where RouterProtocol: AnyRouter
@@ -36,6 +36,9 @@ protocol TablePresenterProtocol: AnyPresenter {
     
     func getNextPage() async
     
+    func refreshTableContent()
+    
+    func titleForSection(section: Int) -> String
 }
 
 class TablePresenter: TablePresenterProtocol {
@@ -69,7 +72,7 @@ class TablePresenter: TablePresenterProtocol {
     }
     
     func touchedCellAt(indexPath: IndexPath) {
-        
+        router?.navigateToDetailScreen(using: sections[indexPath.section].entities[indexPath.row])
     }
     
     func refreshTableContent() {

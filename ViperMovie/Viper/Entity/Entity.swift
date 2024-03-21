@@ -11,7 +11,7 @@ protocol Entity {
     var name: String { get }
     var overview: String { get }
     var rating: Float { get }
-    var genres: [String] { get }
+    var genres: String { get }
     var image: Data? { get }
 }
 

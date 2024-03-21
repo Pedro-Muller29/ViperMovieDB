@@ -7,10 +7,10 @@
 
 import UIKit
 
-class ItemListView: UIViewController, AnyView {
-    var presenter: TablePresenter?
+class ItemListView: UIViewController, TableView {
     
     // MARK: Presenter reference
+    var presenter: (any TablePresenterProtocol)?
     
     // MARK: UI Components
     private let tableView: UITableView = {
@@ -45,7 +45,9 @@ class ItemListView: UIViewController, AnyView {
         ])
         self.navigationController?.navigationBar.prefersLargeTitles = true
         self.navigationItem.title = "Movies"
-        self.navigationItem.searchController = UISearchController()
+        let search = UISearchController()
+        search.searchBar.delegate = self
+        self.navigationItem.searchController = search
     }
     
     // MARK: Updating
@@ -56,6 +58,7 @@ class ItemListView: UIViewController, AnyView {
     }
 }
 
+// MARK: Table View Delegate
 extension ItemListView: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -91,12 +94,15 @@ extension ItemListView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        presenter?.router?.navigateToDetailScreen()
+        presenter?.touchedCellAt(indexPath: indexPath)
     }
     
 }
 
-protocol ProtocolA {}
-protocol ProtocolB {}
-
-typealias ProtocolC = ProtocolA & ProtocolB
+// MARK: Serch Controller Delegate
+extension ItemListView: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        print("searchbar: \(searchText)")
+        // TODO: Lembrard depois de ligar isso no presenter
+    }
+}

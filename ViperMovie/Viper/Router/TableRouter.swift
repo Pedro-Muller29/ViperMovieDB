@@ -27,8 +27,9 @@ class TableRouter: AnyRouter {
     }
     
     //Passar a viewController na chamada
-    func navigateToDetailScreen(viewController: ItemListView? = nil) {
-        let view = ItemListView()
+    func navigateToDetailScreen(using entity: Entity) {
+        let view = DetailsView()
+        view.entity = entity
         
         entry?.navigationController?.pushViewController(view, animated: true)
     }
