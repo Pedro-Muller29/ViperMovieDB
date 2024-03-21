@@ -7,10 +7,10 @@
 
 import UIKit
 
-class ItemListView: UIViewController, AnyView {
+class ItemListView: UIViewController, TableView {
     
     // MARK: Presenter reference
-    var presenter: TablePresenter?
+    var presenter: (any TablePresenterProtocol)?
     
     // MARK: UI Components
     private let tableView: UITableView = {
