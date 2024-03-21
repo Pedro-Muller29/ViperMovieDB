@@ -12,13 +12,13 @@ import NetworkService
 public protocol AnyPresenter: AnyObject {
     associatedtype InteractorProtocol where InteractorProtocol: AnyInteractor
     
- //   associatedtype RouterProtocol where RouterProtocol: AnyRouter
+    associatedtype RouterProtocol where RouterProtocol: AnyRouter
     
     associatedtype ViewProtocol where ViewProtocol: AnyView
     
     var iteractor: InteractorProtocol? { get set }
     
-    var router: AnyRouter? { get set }
+    var router: RouterProtocol? { get set }
     
     var view: ViewProtocol? { get set }
 }
@@ -40,7 +40,7 @@ protocol TablePresenterProtocol: AnyPresenter {
 
 class TablePresenter: TablePresenterProtocol {
     var iteractor: InteractorMovie?
-    var router: AnyRouter?
+    var router: TableRouter?
     var view: ItemListView?
     
     internal var sections: [SectionTable] = []
@@ -87,7 +87,7 @@ class TablePresenter: TablePresenterProtocol {
         return ""
     }
     
-    init(iteractor: InteractorMovie? = nil, router: AnyRouter? = nil, view: ItemListView? = nil) {
+    init(iteractor: InteractorMovie? = nil, router: TableRouter? = nil, view: ItemListView? = nil) {
         self.iteractor = iteractor
         self.router = router
         self.view = view

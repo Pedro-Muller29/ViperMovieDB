@@ -15,7 +15,7 @@ class TableRouter: AnyRouter {
         let view = ItemListView()
         let presenter  = TablePresenter()
         let interactor = InteractorMovie()
-       
+        
         view.presenter = presenter
         interactor.presenter = presenter
         presenter.router = router
@@ -25,4 +25,12 @@ class TableRouter: AnyRouter {
         router.entry = view as? EntryPoint
         return router
     }
+    
+    //Passar a viewController na chamada
+    func navigateToDetailScreen(viewController: ItemListView? = nil) {
+        let view = ItemListView()
+        
+        entry?.navigationController?.pushViewController(view, animated: false)
+    }
+
 }
