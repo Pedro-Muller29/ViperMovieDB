@@ -63,13 +63,29 @@ extension ItemListView: UITableViewDelegate, UITableViewDataSource {
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ImageTitleDescriptionRatingTableViewCell.identifier, for: indexPath)
                 as? ImageTitleDescriptionRatingTableViewCell else { return UITableViewCell() }
-//        cell.data = presenter?.getDataForCell(identifier: ImageTitleDescriptionRatingTableViewCell.identifier, indexPath: indexPath)
         if let entity = presenter?.getDataForCell(identifier: ImageTitleDescriptionRatingTableViewCell.identifier, indexPath: indexPath) {
             cell.updateUI(with: entity)
         }
         return cell
     }
     
-    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let label = UILabel()
+        label.text = presenter?.titleForSection(section: section)
+        label.font = .systemFont(ofSize: 20, weight: .semibold)
+        label.textColor = .label
+        let header: UITableViewHeaderFooterView = UITableViewHeaderFooterView()
+        header.addSubview(label)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            label.leadingAnchor.constraint(equalTo: header.leadingAnchor, constant: 20),
+            label.centerYAnchor.constraint(equalTo: header.centerYAnchor)
+        ])
+        return header
+    }
 }
 
+protocol ProtocolA {}
+protocol ProtocolB {}
+
+typealias ProtocolC = ProtocolA & ProtocolB

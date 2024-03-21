@@ -79,6 +79,10 @@ class TablePresenter: TablePresenterProtocol {
         
     }
     
+    func titleForSection(section: Int) -> String {
+        return "Popular Movies"
+    }
+    
     init(iteractor: InteractorProtocol? = nil, router: RouterProtocol? = nil, view: ViewProtocol? = nil) {
         self.iteractor = iteractor
         self.router = router
