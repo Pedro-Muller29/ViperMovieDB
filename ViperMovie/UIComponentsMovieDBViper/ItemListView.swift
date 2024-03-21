@@ -57,6 +57,11 @@ class ItemListView: UIViewController, AnyView {
 }
 
 extension ItemListView: UITableViewDelegate, UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        presenter?.getNumberOfSections() ?? 0
+    }
+    
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         presenter?.getNumberOfRows(sectionNumber: section) ?? 20
     }

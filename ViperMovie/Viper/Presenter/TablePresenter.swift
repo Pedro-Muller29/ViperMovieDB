@@ -51,6 +51,7 @@ class TablePresenter: TablePresenterProtocol {
     }
     
     func getNumberOfSections() -> Int {
+        print("number of sections: \(sections.count)")
         return sections.count
     }
     
