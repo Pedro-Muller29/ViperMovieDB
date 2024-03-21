@@ -21,6 +21,8 @@
 		85EA23EB2BAA214A0013AA7B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 85EA23EA2BAA214A0013AA7B /* SceneDelegate.swift */; };
 		85EA23F22BAA214D0013AA7B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 85EA23F12BAA214D0013AA7B /* Assets.xcassets */; };
 		85EA23F52BAA214D0013AA7B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 85EA23F32BAA214D0013AA7B /* LaunchScreen.storyboard */; };
+		A74DE93D2BAB7117000048A0 /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74DE93C2BAB7117000048A0 /* DetailsView.swift */; };
+		A74DE93F2BAB7208000048A0 /* DetailsHeaderViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74DE93E2BAB7208000048A0 /* DetailsHeaderViewCell.swift */; };
 		F906D6982BAA24AE005B5B52 /* ImageTitleDescriptionRatingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F906D6952BAA24AE005B5B52 /* ImageTitleDescriptionRatingTableViewCell.swift */; };
 		F906D6992BAA24AE005B5B52 /* ItemListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F906D6972BAA24AE005B5B52 /* ItemListView.swift */; };
 /* End PBXBuildFile section */
@@ -55,6 +57,8 @@
 		85EA23F12BAA214D0013AA7B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		85EA23F42BAA214D0013AA7B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		85EA23F62BAA214D0013AA7B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A74DE93C2BAB7117000048A0 /* DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
+		A74DE93E2BAB7208000048A0 /* DetailsHeaderViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsHeaderViewCell.swift; sourceTree = "<group>"; };
 		F906D6952BAA24AE005B5B52 /* ImageTitleDescriptionRatingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTitleDescriptionRatingTableViewCell.swift; sourceTree = "<group>"; };
 		F906D6972BAA24AE005B5B52 /* ItemListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -170,6 +174,8 @@
 			children = (
 				F906D6952BAA24AE005B5B52 /* ImageTitleDescriptionRatingTableViewCell.swift */,
 				F906D6972BAA24AE005B5B52 /* ItemListView.swift */,
+				A74DE93C2BAB7117000048A0 /* DetailsView.swift */,
+				A74DE93E2BAB7208000048A0 /* DetailsHeaderViewCell.swift */,
 			);
 			path = UIComponentsMovieDBViper;
 			sourceTree = "<group>";
@@ -251,6 +257,8 @@
 				852F939D2BAA254D006E3CAC /* TablePresenter.swift in Sources */,
 				857ECAB72BAA2AA600A5C84D /* MovieInteractor.swift in Sources */,
 				238EABC72BAB5C1800B69426 /* TableRouter.swift in Sources */,
+				A74DE93F2BAB7208000048A0 /* DetailsHeaderViewCell.swift in Sources */,
+				A74DE93D2BAB7117000048A0 /* DetailsView.swift in Sources */,
 				852F93952BAA2515006E3CAC /* Entity.swift in Sources */,
 				852F93962BAA2515006E3CAC /* MovieEntity.swift in Sources */,
 				852F93922BAA2503006E3CAC /* AnyView.swift in Sources */,
@@ -400,7 +408,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = TPM3CS87N5;
+				DEVELOPMENT_TEAM = 2V5RBDFH46;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ViperMovie/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -428,7 +436,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = TPM3CS87N5;
+				DEVELOPMENT_TEAM = 2V5RBDFH46;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ViperMovie/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

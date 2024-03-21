@@ -19,8 +19,23 @@ class MovieEntity: Entity, Codable {
     var name: String
     var overview: String
     var rating: Float
-    var genres: [String] = []
+    
+    var genres: String {
+        var result = ""
+        
+        for genre in genresList {
+            result.append("\(genre), ")
+        }
+        
+        _ = result.popLast()
+        _ = result.popLast()
+        
+        return result
+    }
+    
     var genreIds: [Int]
     var image: Data? = nil
     var urlPath: String
+    
+    var genresList: [String] = []
 }

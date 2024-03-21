@@ -9,7 +9,7 @@ import Foundation
 import NetworkService
 
 
-public protocol AnyPresenter: AnyObject {
+protocol AnyPresenter: AnyObject {
     associatedtype InteractorProtocol where InteractorProtocol: AnyInteractor
     
     associatedtype RouterProtocol = any AnyRouter
@@ -41,7 +41,6 @@ protocol TablePresenterProtocol: AnyPresenter where RouterProtocol == any TableR
     func getNextPage(sectionIndex: Int)
     
     func refreshTableContent()
-
 }
 
 class TablePresenter<EntityType>: TablePresenterProtocol where EntityType: Entity {
@@ -60,6 +59,7 @@ class TablePresenter<EntityType>: TablePresenterProtocol where EntityType: Entit
     }
     
     func getNumberOfSections() -> Int {
+        print("number of sections: \(sections.count)")
         return sections.count
     }
     
@@ -81,7 +81,7 @@ class TablePresenter<EntityType>: TablePresenterProtocol where EntityType: Entit
     }
     
     func touchedCellAt(indexPath: IndexPath) {
-        
+        router?.navigateToDetailScreen(using: sections[indexPath.section].entities[indexPath.row])
     }
     
     func refreshTableContent() {

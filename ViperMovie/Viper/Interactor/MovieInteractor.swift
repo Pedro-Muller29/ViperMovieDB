@@ -15,7 +15,7 @@ class CachedEntryObject: NSObject {
     }
 }
 
-public protocol AnyInteractor {
+protocol AnyInteractor {
    associatedtype PresenterProtocol where PresenterProtocol: AnyPresenter
     var presenter: PresenterProtocol? { get set }
 }

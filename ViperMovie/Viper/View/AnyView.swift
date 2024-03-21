@@ -7,7 +7,7 @@
 
 import Foundation
 
-public protocol AnyView {
+protocol AnyView {
     associatedtype PresenterProtocol = any AnyPresenter
     var presenter: PresenterProtocol? { get set }
     func update()

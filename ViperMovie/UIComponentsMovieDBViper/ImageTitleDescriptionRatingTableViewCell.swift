@@ -126,7 +126,9 @@ class ImageTitleDescriptionRatingTableViewCell: UITableViewCell {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
+            super.setSelected(false, animated: animated)
+        })
         // Configure the view for the selected state
     }
 

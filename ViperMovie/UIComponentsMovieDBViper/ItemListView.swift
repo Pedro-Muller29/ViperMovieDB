@@ -55,7 +55,9 @@ class ItemListView: UIViewController, TableView {
         ])
         self.navigationController?.navigationBar.prefersLargeTitles = true
         self.navigationItem.title = "Movies"
-        self.navigationItem.searchController = UISearchController()
+        let search = UISearchController()
+        search.searchBar.delegate = self
+        self.navigationItem.searchController = search
     }
     
     // MARK: Updating
@@ -66,7 +68,13 @@ class ItemListView: UIViewController, TableView {
     }
 }
 
+// MARK: Table View Delegate
 extension ItemListView: UITableViewDelegate, UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        presenter?.getNumberOfSections() ?? 0
+    }
+    
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         presenter?.getNumberOfRows(sectionNumber: section) ?? 20
     }
@@ -96,13 +104,17 @@ extension ItemListView: UITableViewDelegate, UITableViewDataSource {
         ])
         return header
     }
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        presenter?.router?.navigateToDetailScreen(viewController: nil)
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        presenter?.touchedCellAt(indexPath: indexPath)
     }
     
 }
 
-protocol ProtocolA {}
-protocol ProtocolB {}
-
-typealias ProtocolC = ProtocolA & ProtocolB
+// MARK: Serch Controller Delegate
+extension ItemListView: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        print("searchbar: \(searchText)")
+        // TODO: Lembrard depois de ligar isso no presenter
+    }
+}
