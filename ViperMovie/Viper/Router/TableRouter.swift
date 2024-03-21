@@ -30,7 +30,7 @@ class TableRouter: AnyRouter {
     func navigateToDetailScreen(viewController: ItemListView? = nil) {
         let view = ItemListView()
         
-        entry?.navigationController?.pushViewController(view, animated: false)
+        entry?.navigationController?.pushViewController(view, animated: true)
     }
 
 }
