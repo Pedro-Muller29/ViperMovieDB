@@ -39,6 +39,10 @@ public struct NetworkService {
                     return completion(.failure(URLError(.downloadDecodingFailedToComplete)))
                 }
                 
+                if arrays.isEmpty {
+                    completion(.failure(URLError(.downloadDecodingFailedToComplete)))
+                }
+                
                 for array in arrays {
                     let dicts = array.compactMap { element in
                         element as? [String : Any]
