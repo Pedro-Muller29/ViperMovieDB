@@ -13,18 +13,30 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+        
         guard let windowScene = (scene as? UIWindowScene) else { return }
+
+        let tableRouter = TableRouter.start()
+        guard let initialVC = tableRouter.entry else {return}
+        
         let window = UIWindow(windowScene: windowScene)
-        let vc = ItemListView()
-        let interactor = InteractorMovie()
-        let presenter = TablePresenter<MovieEntity>(iteractor: interactor, view: vc)
-        interactor.presenter = presenter
-        presenter.iteractor = interactor
-        vc.presenter = presenter
-//        vc.presenter?.view = vc
-        window.rootViewController = vc
-        window.makeKeyAndVisible()
+// <<<<<<< HEAD
+//         let vc = ItemListView()
+//         let interactor = InteractorMovie()
+//         let presenter = TablePresenter<MovieEntity>(iteractor: interactor, view: vc)
+//         interactor.presenter = presenter
+//         presenter.iteractor = interactor
+//         vc.presenter = presenter
+// //        vc.presenter?.view = vc
+//         window.rootViewController = vc
+//         window.makeKeyAndVisible()
+// =======
+        let navigationController = UINavigationController(rootViewController: initialVC)
+        
+        window.rootViewController = navigationController
+// >>>>>>> main
         self.window = window
+        window.makeKeyAndVisible()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

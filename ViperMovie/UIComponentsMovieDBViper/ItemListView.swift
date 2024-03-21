@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ItemListView: UIViewController, AnyView {
+class ItemListView: UIViewController, TableView {
     
     // MARK: Presenter reference
     var presenter: (any TablePresenterProtocol)?
@@ -19,6 +19,7 @@ class ItemListView: UIViewController, AnyView {
         tableView.backgroundColor = .systemBackground
         tableView.allowsSelection = true
         tableView.register(ImageTitleDescriptionRatingTableViewCell.self, forCellReuseIdentifier: ImageTitleDescriptionRatingTableViewCell.identifier)
+        tableView.separatorStyle = .none
         return tableView
     }()
     
@@ -31,6 +32,7 @@ class ItemListView: UIViewController, AnyView {
         
         tableViewRefresh.addTarget(self, action:#selector(refreshTableContent), for: .valueChanged)
         self.setupUI()
+        presenter?.refreshTableContent()
         // Do any additional setup after loading the view.
     }
     
@@ -38,8 +40,8 @@ class ItemListView: UIViewController, AnyView {
         presenter?.refreshTableContent()
         tableViewRefresh.endRefreshing()
     }
-    
-    // MARK: Setup UI
+
+    // MARK: Setup UIS
     func setupUI() {
         view.backgroundColor = .red
         view.addSubview(tableView)
@@ -47,9 +49,12 @@ class ItemListView: UIViewController, AnyView {
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.topAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+            tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
         ])
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+        self.navigationItem.title = "Movies"
+        self.navigationItem.searchController = UISearchController()
     }
     
     // MARK: Updating
@@ -68,6 +73,7 @@ extension ItemListView: UITableViewDelegate, UITableViewDataSource {
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ImageTitleDescriptionRatingTableViewCell.identifier, for: indexPath)
                 as? ImageTitleDescriptionRatingTableViewCell else { return UITableViewCell() }
+
         //        cell.data = presenter?.getDataForCell(identifier: ImageTitleDescriptionRatingTableViewCell.identifier, indexPath: indexPath)
         if let entity = presenter?.getDataForCell(identifier: ImageTitleDescriptionRatingTableViewCell.identifier, indexPath: indexPath) {
             cell.updateUI(with: entity)
@@ -75,6 +81,27 @@ extension ItemListView: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let label = UILabel()
+        label.text = presenter?.titleForSection(section: section)
+        label.font = .systemFont(ofSize: 20, weight: .semibold)
+        label.textColor = .label
+        let header: UITableViewHeaderFooterView = UITableViewHeaderFooterView()
+        header.addSubview(label)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            label.leadingAnchor.constraint(equalTo: header.leadingAnchor, constant: 20),
+            label.centerYAnchor.constraint(equalTo: header.centerYAnchor)
+        ])
+        return header
+    }
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        presenter?.router?.navigateToDetailScreen(viewController: nil)
+    }
     
 }
 
+protocol ProtocolA {}
+protocol ProtocolB {}
+
+typealias ProtocolC = ProtocolA & ProtocolB

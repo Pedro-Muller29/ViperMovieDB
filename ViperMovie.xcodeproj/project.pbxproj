@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		238EABC72BAB5C1800B69426 /* TableRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238EABC62BAB5C1800B69426 /* TableRouter.swift */; };
 		852F938E2BAA222F006E3CAC /* NetworkService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 852F938D2BAA222F006E3CAC /* NetworkService.framework */; };
 		852F938F2BAA222F006E3CAC /* NetworkService.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 852F938D2BAA222F006E3CAC /* NetworkService.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		852F93922BAA2503006E3CAC /* AnyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 852F93912BAA2502006E3CAC /* AnyView.swift */; };
@@ -39,6 +40,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		238EABC62BAB5C1800B69426 /* TableRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableRouter.swift; sourceTree = "<group>"; };
 		852F938D2BAA222F006E3CAC /* NetworkService.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = NetworkService.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		852F93912BAA2502006E3CAC /* AnyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyView.swift; sourceTree = "<group>"; };
 		852F93932BAA2515006E3CAC /* Entity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entity.swift; sourceTree = "<group>"; };
@@ -132,6 +134,7 @@
 			isa = PBXGroup;
 			children = (
 				852F93982BAA254D006E3CAC /* AnyRouter.swift */,
+				238EABC62BAB5C1800B69426 /* TableRouter.swift */,
 			);
 			path = Router;
 			sourceTree = "<group>";
@@ -247,6 +250,7 @@
 				852F939C2BAA254D006E3CAC /* AnyRouter.swift in Sources */,
 				852F939D2BAA254D006E3CAC /* TablePresenter.swift in Sources */,
 				857ECAB72BAA2AA600A5C84D /* MovieInteractor.swift in Sources */,
+				238EABC72BAB5C1800B69426 /* TableRouter.swift in Sources */,
 				852F93952BAA2515006E3CAC /* Entity.swift in Sources */,
 				852F93962BAA2515006E3CAC /* MovieEntity.swift in Sources */,
 				852F93922BAA2503006E3CAC /* AnyView.swift in Sources */,
@@ -396,13 +400,14 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 73DNAYF2TM;
+				DEVELOPMENT_TEAM = TPM3CS87N5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ViperMovie/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -423,13 +428,14 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 73DNAYF2TM;
+				DEVELOPMENT_TEAM = TPM3CS87N5;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ViperMovie/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

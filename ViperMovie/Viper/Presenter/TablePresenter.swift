@@ -9,12 +9,12 @@ import Foundation
 import NetworkService
 
 
-protocol AnyPresenter {
+public protocol AnyPresenter: AnyObject {
     associatedtype InteractorProtocol where InteractorProtocol: AnyInteractor
     
-    associatedtype RouterProtocol where RouterProtocol: AnyRouter
+    associatedtype RouterProtocol = any AnyRouter
     
-    associatedtype ViewProtocol where ViewProtocol: AnyView
+    associatedtype ViewProtocol = any AnyView
     
     var iteractor: InteractorProtocol? { get set }
     
@@ -23,13 +23,16 @@ protocol AnyPresenter {
     var view: ViewProtocol? { get set }
 }
 
-protocol TablePresenterProtocol: AnyPresenter {
+protocol TablePresenterProtocol: AnyPresenter where RouterProtocol == any TableRouterProtocol {
     associatedtype EntityType where EntityType: Entity
+    
     var sections: [SectionTable<EntityType>] { get set }
     
     func getNumberOfSections() -> Int
     
     func getNumberOfRows(sectionNumber: Int) -> Int
+    
+    func titleForSection(section: Int) -> String
     
     func getDataForCell(identifier: String, indexPath: IndexPath) -> Entity
     
@@ -42,8 +45,9 @@ protocol TablePresenterProtocol: AnyPresenter {
 }
 
 class TablePresenter<EntityType>: TablePresenterProtocol where EntityType: Entity {
+    
     var iteractor: InteractorMovie?
-    var router: Router?
+    var router: TableRouterProtocol?
     var view: ItemListView?
     
     var gettingNextPage: Bool = false
@@ -81,7 +85,7 @@ class TablePresenter<EntityType>: TablePresenterProtocol where EntityType: Entit
     }
     
     func refreshTableContent() {
-        self.iteractor?.refreshData()
+        iteractor?.refreshData()
     }
     
     func getNextPage(sectionIndex: Int) {
@@ -109,12 +113,18 @@ class TablePresenter<EntityType>: TablePresenterProtocol where EntityType: Entit
     func updateView() {
         self.view?.update()
     }
+
+    func titleForSection(section: Int) -> String {
+        if sections.count > section {
+            return sections[section].name
+        }
+        return ""
+    }
     
-    init(iteractor: InteractorProtocol? = nil, router: RouterProtocol? = nil, view: ViewProtocol? = nil) {
+    init(iteractor: InteractorMovie? = nil, router: TableRouter? = nil, view: ItemListView? = nil) {
         self.iteractor = iteractor
         self.router = router
         self.view = view
         self.sections = []
-        self.refreshTableContent()
     }
 }

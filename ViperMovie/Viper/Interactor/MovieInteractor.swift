@@ -15,8 +15,8 @@ class CachedEntryObject: NSObject {
     }
 }
 
-protocol AnyInteractor {
-    associatedtype PresenterProtocol where PresenterProtocol: AnyPresenter
+public protocol AnyInteractor {
+   associatedtype PresenterProtocol where PresenterProtocol: AnyPresenter
     var presenter: PresenterProtocol? { get set }
 }
 
@@ -30,9 +30,17 @@ protocol InteractorMovieProtocol: AnyInteractor {
     func getNextPage(page: Int, completion: @escaping([MovieEntity]) -> Void)
 }
 
+
 class InteractorMovie: InteractorMovieProtocol {
+// <<<<<<< HEAD
     
     weak var presenter: TablePresenter<MovieEntity>?
+// =======
+//     weak var presenter: TablePresenter?
+// >>>>>>> main
+    
+    
+  //  weak var presenter: TablePresenter?
     
     var network: NetworkService?
     

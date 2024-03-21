@@ -7,12 +7,10 @@
 
 import Foundation
 
-protocol AnyView {
+public protocol AnyView {
     associatedtype PresenterProtocol = any AnyPresenter
     var presenter: PresenterProtocol? { get set }
     func update()
 }
 
-protocol TableView {
-    associatedtype PresenterProtocol = any TablePresenterProtocol
-}
+protocol TableView: AnyView where PresenterProtocol == any TablePresenterProtocol {}
