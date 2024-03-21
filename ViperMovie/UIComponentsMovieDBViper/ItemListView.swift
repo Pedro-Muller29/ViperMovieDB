@@ -84,6 +84,10 @@ extension ItemListView: UITableViewDelegate, UITableViewDataSource {
         ])
         return header
     }
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        presenter?.router?.navigateToDetailScreen()
+    }
+    
 }
 
 protocol ProtocolA {}

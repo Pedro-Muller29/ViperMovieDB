@@ -17,12 +17,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
 
         let tableRouter = TableRouter.start()
-        let initialVC = tableRouter.entry
+        guard let initialVC = tableRouter.entry else {return}
         
-        let windown = UIWindow(windowScene: windowScene)
-        windown.rootViewController = initialVC
-        self.window = windown
-        windown.makeKeyAndVisible()
+        let window = UIWindow(windowScene: windowScene)
+        let navigationController = UINavigationController(rootViewController: initialVC)
+        
+        window.rootViewController = navigationController
+        self.window = window
+        window.makeKeyAndVisible()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

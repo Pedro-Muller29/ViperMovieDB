@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-public typealias EntryPoint = (any UIViewController & AnyView)
+public typealias EntryPoint = (any UIViewController & AnyView )
 
 public protocol AnyRouter {
     var entry: EntryPoint? { get set }
