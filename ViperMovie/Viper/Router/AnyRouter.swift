@@ -6,11 +6,12 @@
 //
 
 import Foundation
+import UIKit
+
+public typealias EntryPoint = (any UIViewController & AnyView)
 
 public protocol AnyRouter {
-    
+    var entry: EntryPoint? { get set }
+    static func start() -> AnyRouter
 }
 
-class Router: AnyRouter {
-    
-}

@@ -9,8 +9,8 @@ import Foundation
 import NetworkService
 
 
-protocol AnyInteractor {
-    associatedtype PresenterProtocol where PresenterProtocol: AnyPresenter
+public protocol AnyInteractor {
+   associatedtype PresenterProtocol where PresenterProtocol: AnyPresenter
     var presenter: PresenterProtocol? { get set }
 }
 
@@ -23,8 +23,10 @@ protocol InteractorMovieProtocol: AnyInteractor {
 }
 
 class InteractorMovie: InteractorMovieProtocol {
-    
     weak var presenter: TablePresenter?
+    
+    
+  //  weak var presenter: TablePresenter?
     
     var network: NetworkService?
     

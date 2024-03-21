@@ -8,9 +8,9 @@
 import UIKit
 
 class ItemListView: UIViewController, AnyView {
+    var presenter: TablePresenter?
     
     // MARK: Presenter reference
-    var presenter: TablePresenter?
     
     // MARK: UI Components
     private let tableView: UITableView = {
@@ -28,6 +28,7 @@ class ItemListView: UIViewController, AnyView {
         tableView.delegate = self
         tableView.dataSource = self
         self.setupUI()
+        presenter?.refreshTableContent()
         // Do any additional setup after loading the view.
     }
 
