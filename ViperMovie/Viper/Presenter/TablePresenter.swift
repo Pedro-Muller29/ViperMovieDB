@@ -28,6 +28,10 @@ protocol TablePresenterProtocol: AnyPresenter where RouterProtocol == any TableR
     
     var sections: [SectionTable<EntityType>] { get set }
     
+    var search: String { get set }
+    
+    var searchResult: [SectionTable<EntityType>] { get set }
+    
     func getNumberOfSections() -> Int
     
     func getNumberOfRows(sectionNumber: Int) -> Int
@@ -38,7 +42,7 @@ protocol TablePresenterProtocol: AnyPresenter where RouterProtocol == any TableR
     
     func touchedCellAt(indexPath: IndexPath)
     
-    func getNextPage(sectionIndex: Int)
+    func getNextPage(sectionIndex: Int, search: String)
     
     func refreshTableContent()
 }
@@ -49,7 +53,11 @@ class TablePresenter<EntityType>: TablePresenterProtocol where EntityType: Entit
     var router: TableRouterProtocol?
     var view: ItemListView?
     
-    var gettingNextPage: Bool = false
+    var search: String = ""
+    
+    var searchResult: [SectionTable<EntityType>] = []
+    
+//    var gettingNextPage: Bool = false
     
     internal var sections: [SectionTable<EntityType>] = []
     
@@ -59,25 +67,34 @@ class TablePresenter<EntityType>: TablePresenterProtocol where EntityType: Entit
     }
     
     func getNumberOfSections() -> Int {
-        print("number of sections: \(sections.count)")
-        return sections.count
+        return search.isEmpty ? sections.count : searchResult.count
     }
     
     func getNumberOfRows(sectionNumber: Int) -> Int {
         if getNumberOfSections() == 0 {
             return 0
         }
-        return sections[sectionNumber].entities.count
+        return search.isEmpty ? sections[sectionNumber].entities.count : searchResult[sectionNumber].entities.count
     }
     
     func getDataForCell(identifier: String, indexPath: IndexPath) -> Entity {
-        let sectionIndex = indexPath.section
-        let section = sections[sectionIndex]
-        let row = indexPath.row
-        if row >= (section.entities.count - 5) && !gettingNextPage && sectionIndex == 0 {
-            self.getNextPage(sectionIndex: sectionIndex)
+        if search.isEmpty {
+            let sectionIndex = indexPath.section
+            let section = sections[sectionIndex]
+            let row = indexPath.row
+            if row >= (section.entities.count - 5) && sectionIndex != 0 {
+                self.getNextPage(sectionIndex: sectionIndex, search: self.search)
+            }
+            return section.entities[row]
+        } else {
+            let sectionIndex = indexPath.section
+            let section = searchResult[sectionIndex]
+            let row = indexPath.row
+            if row >= (section.entities.count - 5) && sectionIndex != 0 {
+                self.getNextPage(sectionIndex: sectionIndex, search: self.search)
+            }
+            return section.entities[row]
         }
-        return section.entities[row]
     }
     
     func touchedCellAt(indexPath: IndexPath) {
@@ -88,25 +105,36 @@ class TablePresenter<EntityType>: TablePresenterProtocol where EntityType: Entit
         iteractor?.refreshData()
     }
     
-    func getNextPage(sectionIndex: Int) {
-        self.gettingNextPage = true
+    // TODO: CONTINUAR AQUI. PRECISA COLOCAR LOGICA PARA IR FAZER A BUSCA DA PROXIMA PAGINA.
+    func getNextPage(sectionIndex: Int, search: String) {
+//        self.gettingNextPage = true
+        
         let dispatchGroup = DispatchGroup()
-        
-        sections[sectionIndex].page += 1
-        
-        dispatchGroup.enter()
-        self.iteractor?.getNextPage(page: sections[sectionIndex].page, completion: { itens in
-            if let itens = itens as? [EntityType] {
-                self.sections[sectionIndex].entities.append(contentsOf: itens)
-            }
+        if search.isEmpty {
+            sections[sectionIndex].page += 1
             
-            dispatchGroup.leave()
-        })
-        
+            dispatchGroup.enter()
+            self.iteractor?.getNextPage(page: sections[sectionIndex].page, completion: { itens in
+                if let itens = itens as? [EntityType] {
+                    self.sections[sectionIndex].entities.append(contentsOf: itens)
+                }
+                
+                dispatchGroup.leave()
+            })
+        } else {
+            searchResult[sectionIndex].page += 1
+            dispatchGroup.enter()
+            self.iteractor?.getNextPage(page: searchResult[sectionIndex].page, completion: { itens in
+                if let itens = itens as? [EntityType] {
+                    self.searchResult[sectionIndex].entities.append(contentsOf: itens)
+                }
+                
+                dispatchGroup.leave()
+            })
+        }
         dispatchGroup.notify(queue: .main) {
             self.view?.update()
             print("JORGE \(self.sections[sectionIndex].entities.count), page: \(self.sections[sectionIndex].page)")
-            self.gettingNextPage = false
         }
     }
     
@@ -120,6 +148,8 @@ class TablePresenter<EntityType>: TablePresenterProtocol where EntityType: Entit
         }
         return ""
     }
+    
+    
     
     init(iteractor: InteractorMovie? = nil, router: TableRouter? = nil, view: ItemListView? = nil) {
         self.iteractor = iteractor

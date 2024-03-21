@@ -7,13 +7,15 @@
 
 import UIKit
 import NetworkService
+import Combine
 
 class ItemListView: UIViewController, TableView {
     
     // MARK: Presenter reference
     var presenter: (any TablePresenterProtocol)?
     var tableViewRefresh = UIRefreshControl()
-    
+    var searchTask: DispatchWorkItem?
+
     // MARK: UI Components
     private let tableView: UITableView = {
         let tableView = UITableView()
@@ -70,7 +72,8 @@ class ItemListView: UIViewController, TableView {
 
 // MARK: Table View Delegate
 extension ItemListView: UITableViewDelegate, UITableViewDataSource {
-    
+   
+
     func numberOfSections(in tableView: UITableView) -> Int {
         presenter?.getNumberOfSections() ?? 0
     }
@@ -109,12 +112,29 @@ extension ItemListView: UITableViewDelegate, UITableViewDataSource {
         presenter?.touchedCellAt(indexPath: indexPath)
     }
     
+
 }
 
+// TODO: CHAMAR AQUI OS SEARCHS
 // MARK: Serch Controller Delegate
 extension ItemListView: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        print("searchbar: \(searchText)")
-        // TODO: Lembrard depois de ligar isso no presenter
+         guard let searchText = searchBar.text else { return }
+        
+        self.searchTask?.cancel()
+
+        let task = DispatchWorkItem { [weak self] in
+            DispatchQueue.global(qos: .userInteractive).async { [weak self] in
+              print(searchText)
+              DispatchQueue.main.async {
+                  // TODO: PARA A CHAMADA
+                  //Update UI
+              }
+            }
+          }
+        
+        self.searchTask = task
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.25, execute: task)
+
     }
 }
