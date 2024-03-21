@@ -42,6 +42,8 @@ protocol TablePresenterProtocol: AnyPresenter where RouterProtocol == any TableR
     
     func touchedCellAt(indexPath: IndexPath)
     
+    func goSearchEntity(searchText: String)
+    
     func getNextPage(sectionIndex: Int, search: String)
     
     func refreshTableContent()
@@ -105,36 +107,36 @@ class TablePresenter<EntityType>: TablePresenterProtocol where EntityType: Entit
         iteractor?.refreshData()
     }
     
+    func goSearchEntity(searchText: String) {
+        self.search = searchText
+        self.searchResult = [ SectionTable(name: "Search", page: 0, entities: []) ]
+        self.getNextPage(sectionIndex: 0, search: searchText)
+    }
+    
     // TODO: CONTINUAR AQUI. PRECISA COLOCAR LOGICA PARA IR FAZER A BUSCA DA PROXIMA PAGINA.
     func getNextPage(sectionIndex: Int, search: String) {
-//        self.gettingNextPage = true
-        
         let dispatchGroup = DispatchGroup()
         if search.isEmpty {
             sections[sectionIndex].page += 1
-            
             dispatchGroup.enter()
-            self.iteractor?.getNextPage(page: sections[sectionIndex].page, completion: { itens in
+            self.iteractor?.getNextPage(page: sections[sectionIndex].page, search: search, completion: { itens in
                 if let itens = itens as? [EntityType] {
                     self.sections[sectionIndex].entities.append(contentsOf: itens)
                 }
-                
                 dispatchGroup.leave()
             })
         } else {
             searchResult[sectionIndex].page += 1
             dispatchGroup.enter()
-            self.iteractor?.getNextPage(page: searchResult[sectionIndex].page, completion: { itens in
+            self.iteractor?.getNextPage(page: searchResult[sectionIndex].page, search: search, completion: { itens in
                 if let itens = itens as? [EntityType] {
                     self.searchResult[sectionIndex].entities.append(contentsOf: itens)
                 }
-                
                 dispatchGroup.leave()
             })
         }
         dispatchGroup.notify(queue: .main) {
             self.view?.update()
-            print("JORGE \(self.sections[sectionIndex].entities.count), page: \(self.sections[sectionIndex].page)")
         }
     }
     
@@ -148,8 +150,6 @@ class TablePresenter<EntityType>: TablePresenterProtocol where EntityType: Entit
         }
         return ""
     }
-    
-    
     
     init(iteractor: InteractorMovie? = nil, router: TableRouter? = nil, view: ItemListView? = nil) {
         self.iteractor = iteractor

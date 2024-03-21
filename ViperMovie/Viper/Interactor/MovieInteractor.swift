@@ -93,26 +93,21 @@ class InteractorMovie: InteractorMovieProtocol {
     }
     
     func getNextPage(page: Int, search: String, completion: @escaping([MovieEntity]) -> Void) {
-        if search.isEmpty {
-            guard let request = MovieDBURLRequestBuilder.movie(category: .nowPlaying, page: page).request else { return }
-            NetworkService.fetch(request: request) { (result: Result<[MovieEntity], any Error>) in
-                switch result {
-                case .success(let success):
-                    for movie in success {
-                        self.getImageLocal(urlPath: movie.urlPath) { data in
-                            guard let data = data else { return }
-                            movie.image = data
-                            self.presenter?.updateView()
-                        }
+        guard let request = MovieDBURLRequestBuilder.movie(category: search.isEmpty ? .nowPlaying : .search(search), page: page).request else { return }
+        NetworkService.fetch(request: request) { (result: Result<[MovieEntity], any Error>) in
+            switch result {
+            case .success(let success):
+                for movie in success {
+                    self.getImageLocal(urlPath: movie.urlPath) { data in
+                        guard let data = data else { return }
+                        movie.image = data
+                        self.presenter?.updateView()
                     }
-                    completion(success)
-                case .failure(_):
-                    completion([])
                 }
+                completion(success)
+            case .failure(_):
+                completion([])
             }
-        } else {
-            // TODO: PENDENTE PEGAR COM O GABRIEL O ENDPOINT DO URL BUILDER. E IMPLEMENTAR A CHAMADA
-//            guard let request = MovieDBURLRequestBuilder
         }
     }
     

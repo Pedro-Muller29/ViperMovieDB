@@ -119,22 +119,23 @@ extension ItemListView: UITableViewDelegate, UITableViewDataSource {
 // MARK: Serch Controller Delegate
 extension ItemListView: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-         guard let searchText = searchBar.text else { return }
+        guard let searchText = searchBar.text else { return }
         
         self.searchTask?.cancel()
-
+        
         let task = DispatchWorkItem { [weak self] in
             DispatchQueue.global(qos: .userInteractive).async { [weak self] in
-              print(searchText)
-              DispatchQueue.main.async {
-                  // TODO: PARA A CHAMADA
-                  //Update UI
-              }
+                print(searchText)
+                DispatchQueue.main.async {
+                    // TODO: PARA A CHAMADA
+                    self?.presenter?.goSearchEntity(searchText: searchText)
+                    //Update UI
+                }
             }
-          }
+        }
         
         self.searchTask = task
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.25, execute: task)
-
+        
     }
 }
