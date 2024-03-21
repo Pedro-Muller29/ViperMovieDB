@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MovieEntity: Entity, Codable {
+class MovieEntity: Entity, Codable {
     private enum CodingKeys: String, CodingKey {
         case name = "title"
         case overview

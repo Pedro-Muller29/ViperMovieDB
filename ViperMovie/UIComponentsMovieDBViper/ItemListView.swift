@@ -10,7 +10,8 @@ import UIKit
 class ItemListView: UIViewController, AnyView {
     
     // MARK: Presenter reference
-    var presenter: TablePresenter?
+    var presenter: (any TablePresenterProtocol)?
+    var tableViewRefresh = UIRefreshControl()
     
     // MARK: UI Components
     private let tableView: UITableView = {
@@ -26,10 +27,18 @@ class ItemListView: UIViewController, AnyView {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.refreshControl = tableViewRefresh
+        
+        tableViewRefresh.addTarget(self, action:#selector(refreshTableContent), for: .valueChanged)
         self.setupUI()
         // Do any additional setup after loading the view.
     }
-
+    
+    @objc func refreshTableContent() {
+        presenter?.refreshTableContent()
+        tableViewRefresh.endRefreshing()
+    }
+    
     // MARK: Setup UI
     func setupUI() {
         view.backgroundColor = .red
@@ -59,7 +68,7 @@ extension ItemListView: UITableViewDelegate, UITableViewDataSource {
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ImageTitleDescriptionRatingTableViewCell.identifier, for: indexPath)
                 as? ImageTitleDescriptionRatingTableViewCell else { return UITableViewCell() }
-//        cell.data = presenter?.getDataForCell(identifier: ImageTitleDescriptionRatingTableViewCell.identifier, indexPath: indexPath)
+        //        cell.data = presenter?.getDataForCell(identifier: ImageTitleDescriptionRatingTableViewCell.identifier, indexPath: indexPath)
         if let entity = presenter?.getDataForCell(identifier: ImageTitleDescriptionRatingTableViewCell.identifier, indexPath: indexPath) {
             cell.updateUI(with: entity)
         }

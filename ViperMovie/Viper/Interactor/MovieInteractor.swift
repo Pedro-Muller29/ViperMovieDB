@@ -8,27 +8,37 @@
 import Foundation
 import NetworkService
 
+class CachedEntryObject: NSObject {
+    var data: Data
+    init(data: Data) {
+        self.data = data
+    }
+}
 
 protocol AnyInteractor {
     associatedtype PresenterProtocol where PresenterProtocol: AnyPresenter
     var presenter: PresenterProtocol? { get set }
 }
 
-
-
 protocol InteractorMovieProtocol: AnyInteractor {
+    associatedtype EntityType where EntityType: Entity
+    var imagesCached: NSCache<NSString, CachedEntryObject> {get set}
     var network: NetworkService? { get set }
-    var sections: [SectionTable] { get set }
+    
+    var sections: [SectionTable<EntityType>] { get set }
+    
     func getNextPage(page: Int, completion: @escaping([MovieEntity]) -> Void)
 }
 
 class InteractorMovie: InteractorMovieProtocol {
     
-    weak var presenter: TablePresenter?
+    weak var presenter: TablePresenter<MovieEntity>?
     
     var network: NetworkService?
     
-    var sections: [SectionTable] = []
+    var sections: [SectionTable<MovieEntity>] = []
+    
+    var imagesCached = NSCache<NSString, CachedEntryObject>()
     
     func refreshData() {
         self.sections = []
@@ -40,11 +50,19 @@ class InteractorMovie: InteractorMovieProtocol {
             switch result {
             case .success(let success):
                 movies = success
+                self.sections.append(SectionTable(name: "Now Playing", page: 1, entities: movies))
+                dispatchGroup.leave()
+                for movie in success {
+                    self.getImageLocal(urlPath: movie.urlPath) { data in
+                        guard let data = data else { return }
+                        movie.image = data
+                        self.presenter?.updateView()
+                    }
+                }
             case .failure(_):
-                break
+                self.sections.append(SectionTable(name: "Now Playing", page: 1, entities: movies))
+                dispatchGroup.leave()
             }
-            self.sections.append(SectionTable(name: "Now Playing", page: 1, entities: movies))
-            dispatchGroup.leave()
         }
         
         guard let requestPopular = MovieDBURLRequestBuilder.movie(category: .popular, page: 1).request else { return }
@@ -54,26 +72,69 @@ class InteractorMovie: InteractorMovieProtocol {
             switch result {
             case .success(let success):
                 movies = success
+                self.sections.insert(SectionTable(name: "Popular Movies", page: 1, entities: movies), at: 0)
+                dispatchGroup.leave()
+                for movie in success {
+                    self.getImageLocal(urlPath: movie.urlPath) { data in
+                        guard let data = data else { return }
+                        movie.image = data
+                        self.presenter?.updateView()
+                    }
+                }
             case .failure(_):
-                break
+                self.sections.insert(SectionTable(name: "Popular Movies", page: 1, entities: movies), at: 0)
+                dispatchGroup.leave()
             }
-            self.sections.insert(SectionTable(name: "Popular Movies", page: 1, entities: movies), at: 0)
-            dispatchGroup.leave()
         }
+        
         dispatchGroup.notify(queue: .global(qos: .userInteractive)) {
             self.presenter?.reloadSections(newSections: self.sections)
         }
     }
-    
     
     func getNextPage(page: Int, completion: @escaping([MovieEntity]) -> Void) {
         guard let request = MovieDBURLRequestBuilder.movie(category: .nowPlaying, page: page).request else { return }
         NetworkService.fetch(request: request) { (result: Result<[MovieEntity], any Error>) in
             switch result {
             case .success(let success):
+                for movie in success {
+                    self.getImageLocal(urlPath: movie.urlPath) { data in
+                        guard let data = data else { return }
+                        movie.image = data
+                        self.presenter?.updateView()
+                    }
+                }
                 completion(success)
-            case .failure(let failure):
+            case .failure(_):
                 completion([])
+            }
+        }
+    }
+    
+    private func requestImageRemote(urlPath: String, completion: @escaping (Data?) -> Void) {
+        guard let url = MovieDBURLRequestBuilder.image(size: .height(100), appendage: urlPath).request else { return }
+        NetworkService.fetch(request: url) { (result: Result<Data, any Error>) in
+            switch result {
+                case .success(let data):
+                self.imagesCached.setObject(CachedEntryObject(data: data), forKey: NSString(string: urlPath))
+                completion(data)
+                case .failure(_):
+                completion(nil)
+            }
+        }
+    }
+    
+    private func getImageLocal(urlPath: String, completion: @escaping(Data?) -> ()) {
+        if let data = self.imagesCached.object(forKey: NSString(string: urlPath)) {
+            print("UTILIZANDO MEMORIA LOCAL")
+            completion(data.data)
+        } else {
+            self.requestImageRemote(urlPath: urlPath) { data in
+                if let data = self.imagesCached.object(forKey: NSString(string: urlPath)) {
+                    completion(data.data)
+                } else { 
+                    completion(nil)
+                }
             }
         }
     }

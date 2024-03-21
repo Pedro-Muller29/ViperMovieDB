@@ -17,7 +17,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: windowScene)
         let vc = ItemListView()
         let interactor = InteractorMovie()
-        let presenter = TablePresenter(iteractor: interactor, view: vc)
+        let presenter = TablePresenter<MovieEntity>(iteractor: interactor, view: vc)
         interactor.presenter = presenter
         presenter.iteractor = interactor
         vc.presenter = presenter

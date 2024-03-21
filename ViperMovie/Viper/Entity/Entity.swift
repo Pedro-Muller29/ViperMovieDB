@@ -12,7 +12,7 @@ protocol Entity {
     var overview: String { get }
     var rating: Float { get }
     var genres: [String] { get }
-    var image: Data? { get }
+    var image: Data? { get set }
 }
 
 

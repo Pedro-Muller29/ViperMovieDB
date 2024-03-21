@@ -24,7 +24,8 @@ protocol AnyPresenter {
 }
 
 protocol TablePresenterProtocol: AnyPresenter {
-    var sections: [SectionTable] { get set }
+    associatedtype EntityType where EntityType: Entity
+    var sections: [SectionTable<EntityType>] { get set }
     
     func getNumberOfSections() -> Int
     
@@ -36,18 +37,20 @@ protocol TablePresenterProtocol: AnyPresenter {
     
     func getNextPage(sectionIndex: Int)
     
+    func refreshTableContent()
+
 }
 
-class TablePresenter: TablePresenterProtocol {
+class TablePresenter<EntityType>: TablePresenterProtocol where EntityType: Entity {
     var iteractor: InteractorMovie?
     var router: Router?
     var view: ItemListView?
     
     var gettingNextPage: Bool = false
     
-    internal var sections: [SectionTable] = []
+    internal var sections: [SectionTable<EntityType>] = []
     
-    func reloadSections(newSections: [SectionTable]) {
+    func reloadSections(newSections: [SectionTable<EntityType>]) {
         self.sections = newSections
         self.view?.update()
     }
@@ -89,7 +92,10 @@ class TablePresenter: TablePresenterProtocol {
         
         dispatchGroup.enter()
         self.iteractor?.getNextPage(page: sections[sectionIndex].page, completion: { itens in
-            self.sections[sectionIndex].entities.append(contentsOf: itens)
+            if let itens = itens as? [EntityType] {
+                self.sections[sectionIndex].entities.append(contentsOf: itens)
+            }
+            
             dispatchGroup.leave()
         })
         
@@ -98,6 +104,10 @@ class TablePresenter: TablePresenterProtocol {
             print("JORGE \(self.sections[sectionIndex].entities.count), page: \(self.sections[sectionIndex].page)")
             self.gettingNextPage = false
         }
+    }
+    
+    func updateView() {
+        self.view?.update()
     }
     
     init(iteractor: InteractorProtocol? = nil, router: RouterProtocol? = nil, view: ViewProtocol? = nil) {
