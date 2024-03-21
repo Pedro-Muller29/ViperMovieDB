@@ -12,9 +12,9 @@ import NetworkService
 protocol AnyPresenter: AnyObject {
     associatedtype InteractorProtocol where InteractorProtocol: AnyInteractor
     
-    associatedtype RouterProtocol where RouterProtocol: AnyRouter
+    associatedtype RouterProtocol = any AnyRouter
     
-    associatedtype ViewProtocol where ViewProtocol: AnyView
+    associatedtype ViewProtocol = any AnyView
     
     var iteractor: InteractorProtocol? { get set }
     
@@ -23,32 +23,37 @@ protocol AnyPresenter: AnyObject {
     var view: ViewProtocol? { get set }
 }
 
-protocol TablePresenterProtocol: AnyPresenter {
-    var sections: [SectionTable] { get set }
+protocol TablePresenterProtocol: AnyPresenter where RouterProtocol == any TableRouterProtocol {
+    associatedtype EntityType where EntityType: Entity
+    
+    var sections: [SectionTable<EntityType>] { get set }
     
     func getNumberOfSections() -> Int
     
     func getNumberOfRows(sectionNumber: Int) -> Int
     
+    func titleForSection(section: Int) -> String
+    
     func getDataForCell(identifier: String, indexPath: IndexPath) -> Entity
     
     func touchedCellAt(indexPath: IndexPath)
     
-    func getNextPage() async
+    func getNextPage(sectionIndex: Int)
     
     func refreshTableContent()
-    
-    func titleForSection(section: Int) -> String
 }
 
-class TablePresenter: TablePresenterProtocol {
+class TablePresenter<EntityType>: TablePresenterProtocol where EntityType: Entity {
+    
     var iteractor: InteractorMovie?
-    var router: TableRouter?
+    var router: TableRouterProtocol?
     var view: ItemListView?
     
-    internal var sections: [SectionTable] = []
+    var gettingNextPage: Bool = false
     
-    func reloadSections(newSections: [SectionTable]) {
+    internal var sections: [SectionTable<EntityType>] = []
+    
+    func reloadSections(newSections: [SectionTable<EntityType>]) {
         self.sections = newSections
         self.view?.update()
     }
@@ -66,9 +71,13 @@ class TablePresenter: TablePresenterProtocol {
     }
     
     func getDataForCell(identifier: String, indexPath: IndexPath) -> Entity {
-        let section = indexPath.section
+        let sectionIndex = indexPath.section
+        let section = sections[sectionIndex]
         let row = indexPath.row
-        return sections[section].entities[row]
+        if row >= (section.entities.count - 5) && !gettingNextPage && sectionIndex == 0 {
+            self.getNextPage(sectionIndex: sectionIndex)
+        }
+        return section.entities[row]
     }
     
     func touchedCellAt(indexPath: IndexPath) {
@@ -79,8 +88,30 @@ class TablePresenter: TablePresenterProtocol {
         iteractor?.refreshData()
     }
     
-    func getNextPage() async {
+    func getNextPage(sectionIndex: Int) {
+        self.gettingNextPage = true
+        let dispatchGroup = DispatchGroup()
         
+        sections[sectionIndex].page += 1
+        
+        dispatchGroup.enter()
+        self.iteractor?.getNextPage(page: sections[sectionIndex].page, completion: { itens in
+            if let itens = itens as? [EntityType] {
+                self.sections[sectionIndex].entities.append(contentsOf: itens)
+            }
+            
+            dispatchGroup.leave()
+        })
+        
+        dispatchGroup.notify(queue: .main) {
+            self.view?.update()
+            print("JORGE \(self.sections[sectionIndex].entities.count), page: \(self.sections[sectionIndex].page)")
+            self.gettingNextPage = false
+        }
+    }
+    
+    func updateView() {
+        self.view?.update()
     }
 
     func titleForSection(section: Int) -> String {

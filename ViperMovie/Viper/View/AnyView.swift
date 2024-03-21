@@ -13,6 +13,4 @@ protocol AnyView {
     func update()
 }
 
-protocol TableView: AnyView {
-    associatedtype PresenterProtocol = any TablePresenterProtocol
-}
+protocol TableView: AnyView where PresenterProtocol == any TablePresenterProtocol {}

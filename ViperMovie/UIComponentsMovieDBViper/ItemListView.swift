@@ -11,6 +11,7 @@ class ItemListView: UIViewController, TableView {
     
     // MARK: Presenter reference
     var presenter: (any TablePresenterProtocol)?
+    var tableViewRefresh = UIRefreshControl()
     
     // MARK: UI Components
     private let tableView: UITableView = {
@@ -27,9 +28,17 @@ class ItemListView: UIViewController, TableView {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.refreshControl = tableViewRefresh
+        
+        tableViewRefresh.addTarget(self, action:#selector(refreshTableContent), for: .valueChanged)
         self.setupUI()
         presenter?.refreshTableContent()
         // Do any additional setup after loading the view.
+    }
+    
+    @objc func refreshTableContent() {
+        presenter?.refreshTableContent()
+        tableViewRefresh.endRefreshing()
     }
 
     // MARK: Setup UIS
@@ -72,6 +81,8 @@ extension ItemListView: UITableViewDelegate, UITableViewDataSource {
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ImageTitleDescriptionRatingTableViewCell.identifier, for: indexPath)
                 as? ImageTitleDescriptionRatingTableViewCell else { return UITableViewCell() }
+
+        //        cell.data = presenter?.getDataForCell(identifier: ImageTitleDescriptionRatingTableViewCell.identifier, indexPath: indexPath)
         if let entity = presenter?.getDataForCell(identifier: ImageTitleDescriptionRatingTableViewCell.identifier, indexPath: indexPath) {
             cell.updateUI(with: entity)
         }

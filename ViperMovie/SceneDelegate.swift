@@ -20,9 +20,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let initialVC = tableRouter.entry else {return}
         
         let window = UIWindow(windowScene: windowScene)
+// <<<<<<< HEAD
+//         let vc = ItemListView()
+//         let interactor = InteractorMovie()
+//         let presenter = TablePresenter<MovieEntity>(iteractor: interactor, view: vc)
+//         interactor.presenter = presenter
+//         presenter.iteractor = interactor
+//         vc.presenter = presenter
+// //        vc.presenter?.view = vc
+//         window.rootViewController = vc
+//         window.makeKeyAndVisible()
+// =======
         let navigationController = UINavigationController(rootViewController: initialVC)
         
         window.rootViewController = navigationController
+// >>>>>>> main
         self.window = window
         window.makeKeyAndVisible()
     }

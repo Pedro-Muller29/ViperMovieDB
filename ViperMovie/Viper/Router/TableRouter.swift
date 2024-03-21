@@ -7,13 +7,17 @@
 
 import Foundation
 
-class TableRouter: AnyRouter {
+protocol TableRouterProtocol: AnyRouter {
+    func navigateToDetailScreen(using entity: Entity)
+}
+
+class TableRouter: TableRouterProtocol {
     var entry: EntryPoint?
     
     static func start() -> AnyRouter {
         let router = TableRouter()
         let view = ItemListView()
-        let presenter  = TablePresenter()
+        let presenter  = TablePresenter<MovieEntity>()
         let interactor = InteractorMovie()
         
         view.presenter = presenter

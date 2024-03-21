@@ -6,9 +6,10 @@
 //
 
 import Foundation
+import NetworkService
 
-struct SectionTable {
+struct SectionTable<T> where T: Entity {
     var name: String
     var page: Int
-    var entities: [any Entity]
+    var entities: [T]
 }
