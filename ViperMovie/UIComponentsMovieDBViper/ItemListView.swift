@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import NetworkService
 
 class ItemListView: UIViewController, TableView {
     

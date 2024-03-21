@@ -134,7 +134,6 @@ class InteractorMovie: InteractorMovieProtocol {
     
     private func getImageLocal(urlPath: String, completion: @escaping(Data?) -> ()) {
         if let data = self.imagesCached.object(forKey: NSString(string: urlPath)) {
-            print("UTILIZANDO MEMORIA LOCAL")
             completion(data.data)
         } else {
             self.requestImageRemote(urlPath: urlPath) { data in

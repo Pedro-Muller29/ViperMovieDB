@@ -31,6 +31,7 @@ public enum MovieDBURLRequestBuilder {
         case nowPlaying
         case upcoming
         case details(_ id: Int)
+        case search(_ query: String)
 
         var description: String {
             switch self {
@@ -44,21 +45,25 @@ public enum MovieDBURLRequestBuilder {
                 return "Up coming"
             case .details(_):
                 return "Details"
+            case .search(_):
+                return "Search"
             }
         }
         
         var appendage: String {
             switch self {
             case .popular:
-                return "popular"
+                return "movie/popular"
             case .topRated:
-                return "top_rated"
+                return "movie/top_rated"
             case .nowPlaying:
-                return "now_playing"
+                return "movie/now_playing"
             case .upcoming:
-                return "upcoming"
+                return "movie/upcoming"
             case .details(let id):
-                return "\(id)"
+                return "movie/\(id)"
+            case .search(let query):
+                return "search/movie?query=\(query)&include_adult=false"
             }
         }
     }
@@ -67,7 +72,7 @@ public enum MovieDBURLRequestBuilder {
     case image(size: ImageSize, appendage: String)
     case genre
     
-    static private let movieURL: String = "https://api.themoviedb.org/3/movie/"
+    static private let movieURL: String = "https://api.themoviedb.org/3/"
     static private let imageURL: String = "https://image.tmdb.org/t/p/"
     static private let genreURL: String = "https://api.themoviedb.org/3/genre/movie/list"
     
@@ -79,15 +84,28 @@ public enum MovieDBURLRequestBuilder {
     public var request: URLRequest? {
         switch self {
         case let .movie(category, page):
-            guard let url = URL(string: "\(Self.movieURL)\(category.appendage)\(page != nil ? "?page=\(page!)" : "")") else { return nil }
+            var pageAppendage: String = ""
+            if let page = page {
+                if case .search(_) = category {
+                    pageAppendage = "&"
+                } else {
+                    pageAppendage = "?"
+                }
+                
+                pageAppendage.append("page=\(page)")
+            }
+            
+            guard let url = URL(string: "\(Self.movieURL)\(category.appendage)\(pageAppendage)") else { return nil }
             var request = URLRequest(url: url)
             request.allHTTPHeaderFields = Self.headers
             return request
+            
         case let .image(size, appendage):
             guard let url = URL(string: "\(Self.imageURL)/\(size.appendage)/\(appendage)") else { return nil }
             var request = URLRequest(url: url)
             request.allHTTPHeaderFields = Self.headers
             return request
+            
         case .genre:
             guard let url = URL(string: Self.genreURL) else { return nil }
             var request = URLRequest(url: url)
