@@ -42,6 +42,8 @@ protocol TablePresenterProtocol: AnyPresenter where RouterProtocol == any TableR
     
     func touchedCellAt(indexPath: IndexPath)
     
+    func updateSearchStringToEmpty()
+    
     func goSearchEntity(searchText: String)
     
     func getNextPage(sectionIndex: Int, search: String)
@@ -105,6 +107,11 @@ class TablePresenter<EntityType>: TablePresenterProtocol where EntityType: Entit
     
     func refreshTableContent() {
         iteractor?.refreshData()
+    }
+    
+    func updateSearchStringToEmpty() {
+        self.search = ""
+        self.updateView()
     }
     
     func goSearchEntity(searchText: String) {

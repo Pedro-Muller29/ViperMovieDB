@@ -138,4 +138,9 @@ extension ItemListView: UISearchBarDelegate {
         DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.25, execute: task)
         
     }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.text = ""
+        self.presenter?.updateSearchStringToEmpty()
+    }
 }

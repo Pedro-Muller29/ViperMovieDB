@@ -9,11 +9,11 @@ import Foundation
 
 class MovieEntity: Entity, Codable {
     private enum CodingKeys: String, CodingKey {
+        case urlPath = "poster_path"
         case name = "title"
         case overview
         case rating = "vote_average"
         case genreIds = "genre_ids"
-        case urlPath = "poster_path"
     }
     
     var name: String
@@ -35,7 +35,7 @@ class MovieEntity: Entity, Codable {
     
     var genreIds: [Int]
     var image: Data? = nil
-    var urlPath: String
+    var urlPath: String?
     
     var genresList: [String] = []
 }

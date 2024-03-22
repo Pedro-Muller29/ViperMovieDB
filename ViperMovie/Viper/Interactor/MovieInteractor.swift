@@ -53,7 +53,7 @@ class InteractorMovie: InteractorMovieProtocol {
                 self.sections.append(SectionTable(name: "Now Playing", page: 1, entities: movies))
                 dispatchGroup.leave()
                 for movie in success {
-                    self.getImageLocal(urlPath: movie.urlPath) { data in
+                    self.getImageLocal(urlPath: movie.urlPath ?? "") { data in
                         guard let data = data else { return }
                         movie.image = data
                         self.presenter?.updateView()
@@ -75,7 +75,7 @@ class InteractorMovie: InteractorMovieProtocol {
                 self.sections.insert(SectionTable(name: "Popular Movies", page: 1, entities: movies), at: 0)
                 dispatchGroup.leave()
                 for movie in success {
-                    self.getImageLocal(urlPath: movie.urlPath) { data in
+                    self.getImageLocal(urlPath: movie.urlPath ?? "") { data in
                         guard let data = data else { return }
                         movie.image = data
                         self.presenter?.updateView()
@@ -94,18 +94,22 @@ class InteractorMovie: InteractorMovieProtocol {
     
     func getNextPage(page: Int, search: String, completion: @escaping([MovieEntity]) -> Void) {
         guard let request = MovieDBURLRequestBuilder.movie(category: search.isEmpty ? .nowPlaying : .search(search), page: page).request else { return }
+        if !search.isEmpty {
+            print("REQUEST: \(request)")
+        }
         NetworkService.fetch(request: request) { (result: Result<[MovieEntity], any Error>) in
             switch result {
             case .success(let success):
                 for movie in success {
-                    self.getImageLocal(urlPath: movie.urlPath) { data in
+                    self.getImageLocal(urlPath: movie.urlPath ?? "") { data in
                         guard let data = data else { return }
                         movie.image = data
                         self.presenter?.updateView()
                     }
                 }
                 completion(success)
-            case .failure(_):
+            case .failure(let error):
+                print("DEU MERDA AQUI \(error.localizedDescription)")
                 completion([])
             }
         }
