@@ -32,6 +32,8 @@ protocol TablePresenterProtocol: AnyPresenter where RouterProtocol == any TableR
     
     var searchResult: [SectionTable<EntityType>] { get set }
     
+    func firstLoad()
+    
     func getNumberOfSections() -> Int
     
     func getNumberOfRows(sectionNumber: Int) -> Int
@@ -64,6 +66,14 @@ class TablePresenter<EntityType>: TablePresenterProtocol where EntityType: Entit
 //    var gettingNextPage: Bool = false
     
     internal var sections: [SectionTable<EntityType>] = []
+    
+    func firstLoad() {
+        self.iteractor?.getAllGenreFromRemote {
+            DispatchQueue.main.async {
+                self.refreshTableContent()
+            }
+        }
+    }
     
     func reloadSections(newSections: [SectionTable<EntityType>]) {
         self.sections = newSections

@@ -39,3 +39,9 @@ class MovieEntity: Entity, Codable {
     
     var genresList: [String] = []
 }
+
+
+class Genre: Codable {
+    var id: Int
+    var name: String
+}

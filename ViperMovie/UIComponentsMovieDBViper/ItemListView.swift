@@ -35,7 +35,8 @@ class ItemListView: UIViewController, TableView {
         
         tableViewRefresh.addTarget(self, action:#selector(refreshTableContent), for: .valueChanged)
         self.setupUI()
-        presenter?.refreshTableContent()
+        presenter?.firstLoad()
+//        presenter?.refreshTableContent()
         // Do any additional setup after loading the view.
     }
     
