@@ -15,7 +15,6 @@ class ImageTitleDescriptionRatingTableViewCell: UITableViewCell {
     private let image: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
-        imageView.image = UIImage(systemName: "questionmark")
         imageView.tintColor = .label
         imageView.backgroundColor = .secondaryLabel
         imageView.layer.cornerRadius = 10
