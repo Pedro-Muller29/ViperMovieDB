@@ -19,9 +19,6 @@ class DetailsHeaderViewCell: UITableViewCell {
         view.contentMode = .scaleAspectFit
         if let data = self.entity.image {
             view.image = UIImage(data: data)
-        } else {
-            view.image = UIImage(systemName: "questionmark")
-            view.tintColor = .label
         }
         view.layer.cornerRadius = 10
         view.clipsToBounds = true
