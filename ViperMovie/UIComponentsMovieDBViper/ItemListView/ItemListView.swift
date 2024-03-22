@@ -9,7 +9,7 @@ import UIKit
 import NetworkService
 import Combine
 
-class ItemListView: UIViewController, TableView {
+class ItemListView: UIViewController, ViewWithTable {
     
     // MARK: Presenter reference
     var presenter: (any TablePresenterProtocol)?
@@ -40,6 +40,10 @@ class ItemListView: UIViewController, TableView {
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.update()
+    }
+    
     @objc func refreshTableContent() {
         presenter?.refreshTableContent()
         tableViewRefresh.endRefreshing()
@@ -58,6 +62,7 @@ class ItemListView: UIViewController, TableView {
         ])
         self.navigationController?.navigationBar.prefersLargeTitles = true
         self.navigationItem.title = "Movies"
+        self.navigationController?.navigationBar.tintColor = .label
         let search = UISearchController()
         search.searchBar.delegate = self
         self.navigationItem.searchController = search

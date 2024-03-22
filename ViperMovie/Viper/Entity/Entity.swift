@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol Entity {
+protocol Entity: AnyObject {
     var name: String { get }
     var overview: String { get }
     var rating: Float { get }

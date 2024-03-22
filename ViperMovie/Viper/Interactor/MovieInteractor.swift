@@ -82,6 +82,7 @@ class InteractorMovie: InteractorMovieProtocol {
                         movie.image = data
                         self.presenter?.updateView()
                     }
+                    movie.genresList = self.getIDLocal(ids: movie.genreIds)
                 }
             case .failure(_):
                 self.sections.insert(SectionTable(name: "Popular Movies", page: 1, entities: movies), at: 0)
@@ -108,6 +109,7 @@ class InteractorMovie: InteractorMovieProtocol {
                         movie.image = data
                         self.presenter?.updateView()
                     }
+                    movie.genresList = self.getIDLocal(ids: movie.genreIds)
                 }
                 completion(success)
             case .failure(let error):
@@ -117,7 +119,7 @@ class InteractorMovie: InteractorMovieProtocol {
     }
     
     private func requestImageRemote(urlPath: String, completion: @escaping () -> Void) {
-        guard let url = MovieDBURLRequestBuilder.image(size: .height(100), appendage: urlPath).request else { return }
+        guard let url = MovieDBURLRequestBuilder.image(size: .width(300), appendage: urlPath).request else { return }
         NetworkService.fetch(request: url) { (result: Result<Data, any Error>) in
             switch result {
                 case .success(let data):
