@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class DetailsView: UIViewController, TableView, UITableViewDelegate, UITableViewDataSource {
+class DetailsView: UIViewController, ViewWithTable, UITableViewDelegate, UITableViewDataSource {
     var presenter: (any TablePresenterProtocol)?
     
     var entity: Entity? {
@@ -23,6 +23,7 @@ class DetailsView: UIViewController, TableView, UITableViewDelegate, UITableView
         table.backgroundColor = .systemBackground
         table.allowsSelection = false
         table.register(DetailsHeaderViewCell.self, forCellReuseIdentifier: DetailsHeaderViewCell.identifier)
+        table.separatorStyle = .none
         
         return table
     }()
@@ -34,6 +35,15 @@ class DetailsView: UIViewController, TableView, UITableViewDelegate, UITableView
         tableview.dataSource = self
         
         setupConstraints()
+        setupNavigationTop()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.update()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        presenter?.goBackToListView()
     }
     
     func setupConstraints() {
@@ -47,23 +57,35 @@ class DetailsView: UIViewController, TableView, UITableViewDelegate, UITableView
         ])
     }
     
+    func setupNavigationTop() {
+        self.navigationItem.title = "Details"
+        self.navigationItem.largeTitleDisplayMode = .never
+    }
+    
     func update() {
-        tableview.reloadData()
+        DispatchQueue.main.async { [weak self] in
+            self?.tableview.reloadData()
+        }
     }
 }
 
 extension DetailsView {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        2
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        5
+        1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        guard let cell = tableView.dequeueReusableCell(withIdentifier: DetailsHeaderViewCell.identifier, for: indexPath) as? DetailsHeaderViewCell,
-//              let entity = entity else { return UITableViewCell() }
-        let cell = DetailsHeaderViewCell(entity: entity!, style: .default, reuseIdentifier: DetailsHeaderViewCell.identifier)
-        
-//        cell.entity = entity
-//        cell.updateData()
+        let cell: UITableViewCell
+        if indexPath.section == 0 { // Represents the header cell
+            cell = DetailsHeaderViewCell(entity: entity!, style: .default, reuseIdentifier: DetailsHeaderViewCell.identifier)
+        } else {
+            cell = OverviewTableViewCell(entity: entity!, style: .default, reuseIdentifier: OverviewTableViewCell.identifier)
+        }
         
         return cell
     }

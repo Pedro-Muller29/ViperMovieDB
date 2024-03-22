@@ -23,7 +23,7 @@ protocol AnyPresenter: AnyObject {
     var view: ViewProtocol? { get set }
 }
 
-protocol TablePresenterProtocol: AnyPresenter where RouterProtocol == any TableRouterProtocol {
+protocol TablePresenterProtocol: AnyPresenter where RouterProtocol == any TableRouterProtocol, ViewProtocol == any ViewWithTable {
     associatedtype EntityType where EntityType: Entity
     
     var sections: [SectionTable<EntityType>] { get set }
@@ -41,13 +41,15 @@ protocol TablePresenterProtocol: AnyPresenter where RouterProtocol == any TableR
     func getNextPage(sectionIndex: Int)
     
     func refreshTableContent()
+    
+    func goBackToListView()
 }
 
 class TablePresenter<EntityType>: TablePresenterProtocol where EntityType: Entity {
     
     var iteractor: InteractorMovie?
     var router: TableRouterProtocol?
-    var view: ItemListView?
+    var view: (any ViewWithTable)?
     
     var gettingNextPage: Bool = false
     
@@ -80,8 +82,8 @@ class TablePresenter<EntityType>: TablePresenterProtocol where EntityType: Entit
         return section.entities[row]
     }
     
-    func touchedCellAt(indexPath: IndexPath) {
-        router?.navigateToDetailScreen(using: sections[indexPath.section].entities[indexPath.row])
+    func touchedCellAt(indexPath: IndexPath){
+        router?.navigateToDetailScreen(using: sections[indexPath.section].entities[indexPath.row], current: self)
     }
     
     func refreshTableContent() {
@@ -119,6 +121,10 @@ class TablePresenter<EntityType>: TablePresenterProtocol where EntityType: Entit
             return sections[section].name
         }
         return ""
+    }
+    
+    func goBackToListView() {
+        router?.goBackToListView(presenter: self)
     }
     
     init(iteractor: InteractorMovie? = nil, router: TableRouter? = nil, view: ItemListView? = nil) {

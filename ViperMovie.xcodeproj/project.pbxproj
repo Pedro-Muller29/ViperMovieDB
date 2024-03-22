@@ -25,6 +25,7 @@
 		A74DE93F2BAB7208000048A0 /* DetailsHeaderViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A74DE93E2BAB7208000048A0 /* DetailsHeaderViewCell.swift */; };
 		F906D6982BAA24AE005B5B52 /* ImageTitleDescriptionRatingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F906D6952BAA24AE005B5B52 /* ImageTitleDescriptionRatingTableViewCell.swift */; };
 		F906D6992BAA24AE005B5B52 /* ItemListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F906D6972BAA24AE005B5B52 /* ItemListView.swift */; };
+		F906D69F2BADED1F005B5B52 /* OverviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F906D69E2BADED1F005B5B52 /* OverviewTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -61,6 +62,7 @@
 		A74DE93E2BAB7208000048A0 /* DetailsHeaderViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsHeaderViewCell.swift; sourceTree = "<group>"; };
 		F906D6952BAA24AE005B5B52 /* ImageTitleDescriptionRatingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageTitleDescriptionRatingTableViewCell.swift; sourceTree = "<group>"; };
 		F906D6972BAA24AE005B5B52 /* ItemListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemListView.swift; sourceTree = "<group>"; };
+		F906D69E2BADED1F005B5B52 /* OverviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverviewTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,12 +174,29 @@
 		F906D6942BAA24AE005B5B52 /* UIComponentsMovieDBViper */ = {
 			isa = PBXGroup;
 			children = (
-				F906D6952BAA24AE005B5B52 /* ImageTitleDescriptionRatingTableViewCell.swift */,
-				F906D6972BAA24AE005B5B52 /* ItemListView.swift */,
-				A74DE93C2BAB7117000048A0 /* DetailsView.swift */,
-				A74DE93E2BAB7208000048A0 /* DetailsHeaderViewCell.swift */,
+				F906D6A02BADF27B005B5B52 /* ItemListView */,
+				F906D6A12BADF283005B5B52 /* DetailsView */,
 			);
 			path = UIComponentsMovieDBViper;
+			sourceTree = "<group>";
+		};
+		F906D6A02BADF27B005B5B52 /* ItemListView */ = {
+			isa = PBXGroup;
+			children = (
+				F906D6952BAA24AE005B5B52 /* ImageTitleDescriptionRatingTableViewCell.swift */,
+				F906D6972BAA24AE005B5B52 /* ItemListView.swift */,
+			);
+			path = ItemListView;
+			sourceTree = "<group>";
+		};
+		F906D6A12BADF283005B5B52 /* DetailsView */ = {
+			isa = PBXGroup;
+			children = (
+				A74DE93C2BAB7117000048A0 /* DetailsView.swift */,
+				A74DE93E2BAB7208000048A0 /* DetailsHeaderViewCell.swift */,
+				F906D69E2BADED1F005B5B52 /* OverviewTableViewCell.swift */,
+			);
+			path = DetailsView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -255,6 +274,7 @@
 				856E62DD2BAB60C500E13CE9 /* SectionTable.swift in Sources */,
 				852F939C2BAA254D006E3CAC /* AnyRouter.swift in Sources */,
 				852F939D2BAA254D006E3CAC /* TablePresenter.swift in Sources */,
+				F906D69F2BADED1F005B5B52 /* OverviewTableViewCell.swift in Sources */,
 				857ECAB72BAA2AA600A5C84D /* MovieInteractor.swift in Sources */,
 				238EABC72BAB5C1800B69426 /* TableRouter.swift in Sources */,
 				A74DE93F2BAB7208000048A0 /* DetailsHeaderViewCell.swift in Sources */,

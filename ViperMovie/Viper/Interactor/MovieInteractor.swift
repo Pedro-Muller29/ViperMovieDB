@@ -120,7 +120,7 @@ class InteractorMovie: InteractorMovieProtocol {
     }
     
     private func requestImageRemote(urlPath: String, completion: @escaping (Data?) -> Void) {
-        guard let url = MovieDBURLRequestBuilder.image(size: .height(100), appendage: urlPath).request else { return }
+        guard let url = MovieDBURLRequestBuilder.image(size: .width(300), appendage: urlPath).request else { return }
         NetworkService.fetch(request: url) { (result: Result<Data, any Error>) in
             switch result {
                 case .success(let data):
